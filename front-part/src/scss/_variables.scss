@@ -1,0 +1,27 @@
+@use 'helpers' as *;
+:root {
+  --color-light: #ffffff;
+  --color-light-10: #F4F4F4;
+  --color-dark: #2A2A2A;
+  --color-dark-10: #1A1A1A;
+  --color-gray: #6B6B6B;
+  --color-gray-extra: #A0A0A0;
+  --color-red: #CE4343;
+  --color-page: #F5F5F5;
+  --border-color: #565656;
+  --border-color-light: #E0E0E0;
+
+  --font-family-base: 'Inter', sans-serif;
+  --Font-family-accent: 'Kumbh Sans', sans-serif;
+
+  --container-width: #{rem(1600)};
+  --container-padding-x: #{rem(16)};
+
+  --transition-duration: 0.2s;
+  --border: #{rem(1)} solid var(--border-color);
+  --border-light: #{rem(1)} solid var(--border-color-light);
+
+  @include laptop{
+    --container-width: #{rem(1250)};
+  }
+}

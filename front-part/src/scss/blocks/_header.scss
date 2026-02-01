@@ -1,0 +1,79 @@
+@use "../helpers" as *;
+.header{
+
+
+  &__body{
+    padding-block: #{rem(24)};
+    background-color: var(--color-light);
+    border-bottom: var(--border);
+    row-gap: rem(20);
+
+    &-inner{display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 1rem;}
+
+
+  }
+
+  &__overlay{
+    @include phone-above{
+      display:contents;
+    }
+    @include phone{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      inset: 0;
+      background-color: var(--color-dark-10);
+      padding: 1rem;
+      position: fixed;
+      row-gap: 1rem;
+      z-index: 1;
+      &:not(.is-active){
+        @include hide;
+        translate: 100%;
+
+      }
+    }
+  }
+
+  &__menu{
+    &-list{
+      display: flex;
+      column-gap: rem(40);
+      align-items: center;
+
+      @include phone{
+        flex-direction: column;
+        row-gap: rem(12);
+      }
+      @include laptop{
+        column-gap: rem(24);
+      }
+    }
+    &-link{
+      &.is-active{
+        padding-block: rem(14);
+        padding-inline: rem(24);
+        background-color: var(--color-page);
+        border-color: var(--color-dark-20);
+        border-radius: rem(10);
+        color: var(--color-red);
+        font-weight: 500;
+        pointer-events: none;
+
+        @include laptop{
+          padding-block: rem(10);
+          padding-inline: rem(18);
+        }
+      }
+
+      &__contact-us-link{
+        max-width: 300px;
+        align-self: center;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@use "../helpers" as *;
+.product-section{
+  row-gap: rem(70);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__header{
+    @include flex-center();
+    flex-direction: column;
+  }
+  &__button{
+    align-self: center;
+  }
+}

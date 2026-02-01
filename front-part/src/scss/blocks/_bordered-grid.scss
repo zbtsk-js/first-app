@@ -1,0 +1,48 @@
+@use "../helpers" as *;
+.bordered-grid {
+  --PaddingY: #{fluid(80,40)};
+  --columns: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--columns,), auto);
+  row-gap: rem(30);
+&__item{
+
+}
+  &--2cols {
+    --columns: 2;
+    --paddingInline: #{rem(20)};
+
+  }
+  &--3cols {
+    --columns: 3;
+    --padding-inline: #{rem(30)};
+    @include tablet(){
+      grid-template-columns: repeat(auto-fit, minmax(rem(430), 1fr));
+      --padding-inline: #{rem(20)};
+      > .bordered-grid__item:nth-child(n+4) {
+        display: none;
+      }
+    }
+
+    .bordered-grid__item{
+      @include tablet-above(){
+        &:nth-child(3n-1){
+          padding-inline: var(--padding-inline);
+
+
+        }
+        &:nth-child(3n){
+          padding-left: var(--padding-inline);
+        }
+        &:nth-child(3n-2){
+          padding-right: var(--padding-inline);
+        }
+      }
+
+      @include tablet(){
+        max-width: 600px;
+        margin-inline: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@use "../helpers" as *;
+.product-card{
+display: flex;
+  flex-direction: column;
+  &:has(.product-card__counter){
+    display: grid;
+    grid-template-columns: 20% 80%;
+    width: 100%;
+    column-gap: rem(25);
+    .product-card{
+      &__body{
+        padding: 0;
+        align-items: start;
+      }
+      &__main{
+        justify-content: space-between;
+        align-items: start;
+        flex-direction: column;
+        display: flex;
+        row-gap: rem(40);
+      }
+      &__footer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 95%;
+        border-top: var(--border);
+        padding-top: rem(20);
+      }
+      &__price-wrapper{
+        flex-direction: column;
+        padding: 0;
+        border: none;
+      }
+      }
+    }
+
+
+  &__body,&__price-wrapper{
+    padding-left: rem(25);
+    display: flex;
+    justify-content: start;
+  }
+  &__image{
+    border-radius: rem(10);
+  }
+  &__body{
+    padding-bottom: rem(25);
+    padding-top: rem(20);
+    row-gap: rem(8);
+    flex-direction: column;
+
+  }
+  &__main{
+    border-radius: rem(10);
+    background-color: var(--color-light);
+  }
+img{
+ width: fluid(410, 340)
+}
+}

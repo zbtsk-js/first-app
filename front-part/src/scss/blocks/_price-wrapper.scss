@@ -1,0 +1,5 @@
+@use "../helpers" as *;
+.price-wrapper{
+  border-top: var(--border-light);
+  padding-block: rem(20);
+}
