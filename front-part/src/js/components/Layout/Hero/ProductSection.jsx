@@ -1,8 +1,8 @@
-import ProductCard from "./ProductCard";
-import products from "./ProductData";
-import useDebounce from "../../../hooks/useDebounce";
+import ProductCard from "./ProductCard.jsx";
+import products from "./ProductData.js";
+import useDebounce from "../../../hooks/useDebounce.js";
 import {useState} from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar.jsx";
 
 
 export default function ProductSection({ title, subtitle}) {

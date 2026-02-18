@@ -45,7 +45,7 @@ const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
                         <span>Total:</span>
                         <span>{CartPriceSummary} NOK</span>
                     </div>
-                    <button className='sidebar-menu__button button-primary'>Checkout</button>
+                    <button disabled={CartPriceSummary <= 0} className='sidebar-menu__button button-primary'>Checkout</button>
                 </div>
             </aside>
         </div>

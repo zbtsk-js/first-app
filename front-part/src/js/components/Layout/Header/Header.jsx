@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
-import SidebarMenu from "../sidebarMenu/Sidebar";
-import NavSidebar from "../sidebarMenu/NavSidebar";
+import SidebarMenu from "../sidebarMenu/Sidebar.jsx";
+import NavSidebar from "../sidebarMenu/NavSidebar.jsx";
 
 const HeaderElemnt = () => {
     return (
@@ -68,11 +68,6 @@ const HeaderElemnt = () => {
                             <li className='header__menu-item'>
                                 <NavLink to='/' className={({isActive}) => isActive ? 'header__menu-link is-active' : 'header__menu-link'}>
                                     Home
-                                </NavLink>
-                            </li>
-                            <li className='header__menu-item'>
-                                <NavLink to='/news' className={({isActive}) => isActive ? 'header__menu-link is-active' : 'header__menu-link'}>
-                                    News
                                 </NavLink>
                             </li>
 
