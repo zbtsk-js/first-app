@@ -16,8 +16,9 @@
   &--3cols {
     --columns: 3;
     --padding-inline: #{rem(30)};
+    width: 100%;
     @include tablet(){
-      grid-template-columns: repeat(auto-fit, minmax(rem(430), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(rem(400), 1fr));
       --padding-inline: #{rem(20)};
       > .bordered-grid__item:nth-child(n+4) {
         display: none;
@@ -25,6 +26,10 @@
     }
 
     .bordered-grid__item{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       @include tablet-above(){
         &:nth-child(3n-1){
           padding-inline: var(--padding-inline);

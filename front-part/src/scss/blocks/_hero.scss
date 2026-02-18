@@ -1,23 +1,96 @@
 @use "../helpers" as *;
-.hero{
-  padding-top: rem(65);
+.hero {
   padding-bottom: rem(110);
-  &__header{
+  background-color: #000;
+  color: #fff;
+
+  &__header {
     padding-bottom: rem(120);
-    &-inner{
+    background: linear-gradient(135deg, #ffffff -25%, #000000 20%, #000000 100%);
+    color: #fff;
+    padding-top: rem(65);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 70%;
+      height: 140%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+      filter: blur(40px);
+      transform: rotate(-10deg);
+      pointer-events: none;
+    }
+
+
+    &-inner {
       display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: rem(25);}
-    &-body{
+      align-items: center;
+      justify-content: space-between;
+      gap: rem(40);
+
+      @include phone {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    &-content {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       row-gap: rem(25);
+
+      @include phone {
+        align-items: center;
+      }
+
+      h1 {
+        @include fluid-text(64, 40);
+        font-weight: 700;
+        line-height: 1.1;
+        margin: 0;
+        @include text-gradient;
+      }
+    }
+
+    &-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: rem(20);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
     }
   }
-  &__description{
-    text-align: center;
+
+  &__description {
+    text-align: left;
+    max-width: rem(500);
+    color: rgba(255, 255, 255, 0.8);
+
+    @include phone {
+      text-align: center;
+    }
   }
 
+  .badge {
+    background-color: #fff;
+    color: #000;
+    padding: rem(8) rem(16);
+    border-radius: rem(50);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: rem(12);
+    letter-spacing: 0.05em;
+  }
 }

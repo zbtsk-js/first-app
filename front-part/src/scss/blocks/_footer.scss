@@ -1,6 +1,6 @@
 @use "../helpers" as *;
 .footer{
-  background-color: var(--color-dark);
+  background-color: #0a0a0a;
   color: var(--color-gray-extra);
   &__body{
     padding-block: fluid(90, 40);
@@ -16,8 +16,10 @@
     display: flex;
     flex-direction: column;
     row-gap: rem(30);
+    color: #fff;
     &-description{
       white-space: pre-line;
+      color: rgba(255, 255, 255, 0.7);
     }
     &-body{
       row-gap: rem(15);
@@ -39,11 +41,14 @@
 
 
     &-link{
-      color: var(--color-dark-40);
+      color: rgba(255, 255, 255, 0.6);
+      &:hover {
+        color: #fff;
+      }
     }
 
     &-main-link{
-      color: var(--color-light-10);
+      color: #fff;
       font-weight: 500;
     }
 
@@ -106,6 +111,28 @@
       margin-inline: rem(11);
     }
 
+  }
+
+  &__payments {
+    display: flex;
+    gap: rem(15);
+    align-items: center;
+    color: #fff;
+
+    svg {
+      transition: transform 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-3px);
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    @include tablet {
+      justify-content: center;
+      width: 100%;
+    }
   }
 
 }

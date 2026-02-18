@@ -1,11 +1,27 @@
 @use "../helpers" as *;
-.button{
+
+.button-base {
   padding-inline: rem(25);
   padding-block: rem(20);
   border-radius: rem(10);
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  &-primary{
-    background-color: var(--color-dark);
-    color: var(--color-light);
+.button-primary {
+  @extend .button-base;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #fff;
+
+  &:hover {
+    background-color: transparent;
+    color: #fff;
   }
 }
+

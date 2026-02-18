@@ -4,7 +4,7 @@ import ProductSection from "./ProductSection";
 
 
 
-export default function App() {
+export default function Hero() {
     return (
             <main className="main">
                 <section className="hero">

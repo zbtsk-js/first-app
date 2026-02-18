@@ -1,0 +1,44 @@
+@use "../helpers" as *;
+
+.searchbar{
+  display: flex;
+  line-height: 28px;
+  align-items: center;
+  position: relative;
+  max-width: #{rem(190)};
+  &__input{
+    width: 100%;
+    height: rem(40);
+    line-height: rem(40);
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: rem(8);
+    outline: none;
+    background-color: #1a1a1a;
+    color: #fff;
+    transition: .3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    &:focus, &:hover{
+        outline: none;
+        border-color: #fff;
+        background-color: #222;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+    }
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import {  VisaIcon, MastercardIcon } from 'react-svg-credit-card-payment-icons';
 const Footer = () => {
     const [email, setEmail] = useState('');
 
@@ -47,36 +47,16 @@ const Footer = () => {
 
                 {/* Правый блок: меню колонками */}
                 <nav className="footer__menu" aria-label="Footer navigation">
-                    <div className="footer__menu-column">
-                        <h4 className="footer__menu-main-link">Shop</h4>
-                        <ul className="footer__menu-list">
-                            <li><a className="footer__menu-link" href="#">All products</a></li>
-                            <li><a className="footer__menu-link" href="#">Featured Collection</a></li>
-                            <li><a className="footer__menu-link" href="#">Essential series</a></li>
-                            <li><a className="footer__menu-link" href="#">Premium series</a></li>
-                            <li><a className="footer__menu-link" href="#">Limited Edition</a></li>
-                        </ul>
-                    </div>
+                    
 
                     <div className="footer__menu-column">
-                        <h4 className="footer__menu-main-link">Customer Service</h4>
-                        <ul className="footer__menu-list">
-                            <li><a className="footer__menu-link" href="#">Shipping & Delivery</a></li>
-                            <li><a className="footer__menu-link" href="#">Returns & Exchanges</a></li>
-                            <li><a className="footer__menu-link" href="#">Warranty Information</a></li>
-                            <li><a className="footer__menu-link" href="#">Care Guide</a></li>
-                            <li><a className="footer__menu-link" href="#">Contact Us</a></li>
-                        </ul>
-                    </div>
-
-                    <div className="footer__menu-column">
-                        <h4 className="footer__menu-main-link">Company</h4>
+                        <h4 className="footer__menu-main-link">Om NORDBOX AS</h4>
                         <ul className="footer__menu-list">
                             <li><a className="footer__menu-link" href="#">About NORDBOX</a></li>
-                            <li><a className="footer__menu-link" href="#">Terms & Conditions</a></li>
-                            <li><a className="footer__menu-link" href="#">Privacy Policy</a></li>
-                            <li><a className="footer__menu-link" href="#">Payment Security</a></li>
-                            <li><a className="footer__menu-link" href="#">Sustainability</a></li>
+                            <li><a className="footer__menu-link" href="#">Personvern og cookies</a></li>
+                            <li><a className="footer__menu-link" href="#"></a>Salgsbetingelser</li>
+                            <li><a className="footer__menu-link" href="#">Angrerett</a></li>
+
                         </ul>
                     </div>
                 </nav>
@@ -98,10 +78,9 @@ const Footer = () => {
                 </div>
 
                 <div className="footer__payments" aria-hidden="true">
-                    <span className="payment-badge">VISA</span>
-                    <span className="payment-badge">MC</span>
-                    <span className="payment-badge">AMEX</span>
-                    <span className="payment-badge">PayPal</span>
+                    <VisaIcon format="flatRounded" width={32} />
+                    <MastercardIcon format="logo" width={32} />
+
                 </div>
             </div>
         </footer>

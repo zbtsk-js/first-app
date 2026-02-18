@@ -1,5 +1,11 @@
-import { createRoot } from 'react-dom/client'
-import '../scss/main.scss'
-import App from './App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import Mainroutes from "./components/Mainroutes";
+import {CartProvider} from "./context/CartProvider";
 
-createRoot(document.getElementById('root')).render(<App />)
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <CartProvider>
+        <Mainroutes/>
+    </CartProvider>
+);

@@ -1,16 +1,31 @@
 import React from "react";
-
 export default function Heroheader() {
     return (
-        <header className="hero__header container">
-                    <div className="hero__header-inner">
-                        <span className="badge">Scandinavian design</span>
-                        <h1>Premium Storage Solutions</h1>
+        <div className="hero__header">
+            <div className="container">
+                <div className="hero__header-inner">
+                    <div className="hero__header-content">
+                        <span className="badge">
+                            Premium quality snus
+                        </span>
+                        <h1>
+                            Premium Storage Solutions
+                        </h1>
                         <p className="hero__description">
                             Elegantly crafted containers designed to preserve and protect. Minimalist Scandinavian aesthetics meet exceptional functionality.
                         </p>
-                        <a className="button button-primary hero__button" href="#collection">Explore Collection</a>
+                        <a
+                            className="button button-primary hero__button"
+                            href="#collection"
+                        >
+                            Explore Collection
+                        </a>
                     </div>
-        </header>
+                    <div className="hero__header-image">
+                        <img src='/front-part/public/images/product-card.jpg' alt="Premium Snus Box" />
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

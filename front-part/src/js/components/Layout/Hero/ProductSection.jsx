@@ -1,13 +1,16 @@
-import React from "react";
 import ProductCard from "./ProductCard";
 import products from "./ProductData";
 import useDebounce from "../../../hooks/useDebounce";
 import {useState} from "react";
+import SearchBar from "./SearchBar";
+
 
 export default function ProductSection({ title, subtitle}) {
     const [search, setSearch] = useState('')
-    const DeboundedSearch = useDebounce(search, 500)
-    const SearchedValue =products.filter(p => p.title.toLowerCase().includes(DeboundedSearch.toLowerCase))
+    const DebouncedSearch = useDebounce(search, 500)
+
+    const ListofProducts = products.filter(p => p.title.toLowerCase().includes(DebouncedSearch.toLowerCase()))
+
     return (
         <div id="collection" className="product-section container">
 
@@ -15,17 +18,25 @@ export default function ProductSection({ title, subtitle}) {
                     <h2>{title}</h2>
                     <p className="product-section__subtitle">{subtitle}</p>
                 </header>
-            <input type="search" value={search} onChange={e => setSearch(e.target.value)}/>
-                <div className="bordered-grid bordered-grid--3cols" role="list">
+            <SearchBar search={search} setSearch={setSearch}/>
+                <ul 
+                    className="bordered-grid bordered-grid--3cols" 
+                    role="list"
+                >
 
-                            {SearchedValue.map((product) => (
-                                <div className="bordered-grid__item"  role="listitem">
-                                <ProductCard {...product} />
-                                </div>
-                            ))}
+                    {ListofProducts.length ? (ListofProducts.map(product => (
+                            <li 
+                                key={product.id}
+                                className="bordered-grid__item" 
+                                role="listitem"
+                            >
+
+                                <ProductCard {...product}  />  </li>
+                        ))) : (<div>doesnt exist</div>) }
 
 
-                </div>
+
+                </ul>
 
                 <div className="product-section__button">
                     <a className="button button-primary" href="/catalog">View Full Catalog</a>

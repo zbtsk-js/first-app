@@ -1,0 +1,50 @@
+@use '../helpers' as *;
+.counter {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(2);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: rem(6);
+  padding: rem(2);
+
+  &__btn {
+    @include flex-center;
+    @include square(rem(26));
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: rem(16);
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: rem(4);
+    transition: var(--transition-duration);
+    line-height: 1;
+
+    @include hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &:active {
+      transform: scale(0.85);
+    }
+
+    &:disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
+
+      @include hover(false) {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__value {
+    min-width: rem(24);
+    text-align: center;
+    font-size: rem(13);
+    font-weight: 600;
+    color: #fff;
+    user-select: none;
+  }
+}
