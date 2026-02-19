@@ -5,7 +5,7 @@ const products = [
         subtitle: "Anodized Aluminum",
         capacity: "3 containers",
         price: 80.00,
-        imageSrc: "./front-part/public/images/product-card.jpg",
+        imageSrc: "/images/product-card.jpg",
         imageAlt: "Product image",
         quantity: 1
     },
@@ -15,7 +15,7 @@ const products = [
         subtitle: "Anodized Aluminum",
         capacity: "3 containers",
         price: 80.00,
-        imageSrc: "./front-part/public/images/product-card.jpg",
+        imageSrc: "/images/product-card.jpg",
         imageAlt: "Product image",
         quantity: 1
     },
@@ -25,7 +25,7 @@ const products = [
         subtitle: "Anodized Aluminum",
         capacity: "3 containers",
         price: 80.00,
-        imageSrc: "./front-part/public/images/product-card.jpg",
+        imageSrc: "/images/product-card.jpg",
         imageAlt: "Product image",
         quantity: 1
     }

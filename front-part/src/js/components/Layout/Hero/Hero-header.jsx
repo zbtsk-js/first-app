@@ -22,7 +22,7 @@ export default function Heroheader() {
                         </a>
                     </div>
                     <div className="hero__header-image">
-                        <img src='/front-part/public/images/product-card.jpg' alt="Premium Snus Box" />
+                        <img src='/images/product-card.jpg' alt="Premium Snus Box" />
                     </div>
                 </div>
             </div>
