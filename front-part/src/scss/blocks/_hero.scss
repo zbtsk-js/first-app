@@ -73,6 +73,22 @@
     }
   }
 
+  &__button {
+    &.is-mobile {
+      display: none;
+    }
+
+    @include phone {
+      &.is-desktop {
+        display: none;
+      }
+      &.is-mobile {
+        display: block;
+        width: fit-content;
+      }
+    }
+  }
+
   &__description {
     text-align: left;
     max-width: rem(500);

@@ -37,10 +37,6 @@ export default function ProductSection({ title, subtitle}) {
 
 
                 </ul>
-
-                <div className="product-section__button">
-                    <a className="button button-primary" href="/catalog">View Full Catalog</a>
-                </div>
             </div>
     );
 }

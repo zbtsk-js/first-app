@@ -15,7 +15,7 @@ export default function Heroheader() {
                             Elegantly crafted containers designed to preserve and protect. Minimalist Scandinavian aesthetics meet exceptional functionality.
                         </p>
                         <a
-                            className="button button-primary hero__button"
+                            className="button button-primary hero__button is-desktop"
                             href="#collection"
                         >
                             Explore Collection
@@ -24,6 +24,12 @@ export default function Heroheader() {
                     <div className="hero__header-image">
                         <img src='/images/product-card.jpg' alt="Premium Snus Box" />
                     </div>
+                    <a
+                        className="button button-primary hero__button is-mobile"
+                        href="#collection"
+                    >
+                        Explore Collection
+                    </a>
                 </div>
             </div>
         </div>
