@@ -1,5 +1,10 @@
+@use '../helpers' as *;
 .product-details {
   padding: 60px 24px;
+
+  @include phone {
+    padding: 30px 16px;
+  }
 
   &__container {
     display: grid;
@@ -7,15 +12,23 @@
     gap: 80px;
     align-items: start;
 
-    @media (max-width: 900px) {
-      grid-template-columns: 1fr;
+    @include tablet {
       gap: 40px;
+    }
+
+    @include phone {
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
   }
 
   &__media {
     position: sticky;
     top: 100px;
+
+    @include phone {
+      position: static;
+    }
   }
 
   &__image-wrapper {
@@ -27,6 +40,10 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    @include phone {
+      border-radius: 8px;
+    }
   }
 
   &__image {
@@ -47,12 +64,21 @@
     margin-bottom: 8px;
     color: #1a1a1a;
     line-height: 1.2;
+
+    @include phone {
+      font-size: 28px;
+    }
   }
 
   &__subtitle {
     font-size: 18px;
     color: #666;
     margin-bottom: 24px;
+
+    @include phone {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
   }
 
   &__price-wrapper {
@@ -62,12 +88,21 @@
     margin-bottom: 32px;
     padding-bottom: 24px;
     border-bottom: 1px solid #eee;
+
+    @include phone {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+    }
   }
 
   &__price {
     font-size: 28px;
     font-weight: 600;
     color: #1a1a1a;
+
+    @include phone {
+      font-size: 24px;
+    }
   }
 
   &__vat {
@@ -80,6 +115,11 @@
     flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 32px;
+
+    @include phone {
+      gap: 12px;
+      margin-bottom: 24px;
+    }
   }
 
   .info-badge {
@@ -90,6 +130,13 @@
     padding: 8px 12px;
     border-radius: 6px;
     font-size: 13px;
+
+    @include phone {
+      padding: 6px 10px;
+      font-size: 12px;
+      flex: 1 1 calc(50% - 12px);
+      justify-content: center;
+    }
 
     &__icon {
       font-size: 16px;
@@ -106,7 +153,10 @@
     margin-bottom: 32px;
     font-size: 16px;
 
-
+    @include phone {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
   }
 
   &__spec {
@@ -126,6 +176,12 @@
     background: #fff;
     border: 1px solid #eee;
     border-radius: 12px;
+
+    @include phone {
+      padding: 16px;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
   }
 
   .quantity-selector {
@@ -190,6 +246,11 @@
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @include phone {
+      padding: 14px;
+      font-size: 14px;
+    }
 
     &:hover {
       background-color: #000;
