@@ -1,6 +1,6 @@
 import React from "react";
 import Heroheader from "./Hero-header.jsx";
-import ProductSection from "./ProductSection.jsx";
+import ProductSection from "../Product/ProductSection.jsx";
 
 
 

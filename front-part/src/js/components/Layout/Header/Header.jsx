@@ -3,6 +3,11 @@ import SidebarMenu from "../sidebarMenu/Sidebar.jsx";
 import NavSidebar from "../sidebarMenu/NavSidebar.jsx";
 
 const HeaderElemnt = () => {
+    const navLinks = [
+        { to: '/', label: 'Home' },
+        { to: '/om-snussbox-as', label: 'Om Oss' },
+        { to: '/catalog', label: 'Catalog' },
+    ];
     return (
         <header 
             className='header' 
@@ -11,7 +16,7 @@ const HeaderElemnt = () => {
             <div className='header__body'>
                 <div className='header__body-inner container'>
                     <div className="header__left visible-mobile">
-                        <NavSidebar />
+                        <NavSidebar {...{ navLinks }} />
                     </div>
                     <div className="header__logo-wrapper">
                         <Link
@@ -65,17 +70,17 @@ const HeaderElemnt = () => {
                     </div>
                     <nav className='header__menu hidden-mobile'>
                         <ul className='header__menu-list'>
-                            <li className='header__menu-item'>
-                                <NavLink to='/' className={({isActive}) => isActive ? 'header__menu-link is-active' : 'header__menu-link'}>
-                                    Home
+                            {navLinks.map((link) => (
+                                <li className='header__menu-item'>
+                                <NavLink
+                                    to={link.to}
+                                    className={({isActive}) => isActive ? 'header__menu-link is-active' : 'header__menu-link'}
+                                >
+                                    {link.label}
                                 </NavLink>
-                            </li>
+                                </li>
+                            ))}
 
-                            <li className='header__menu-item'>
-                                <NavLink to='/om-snussbox-as' className={({isActive}) => isActive ? 'header__menu-link is-active' : 'header__menu-link'}>
-                                    Om Oss
-                                </NavLink>
-                            </li>
                         </ul>
                     </nav>
                     <div className='header__cart'>

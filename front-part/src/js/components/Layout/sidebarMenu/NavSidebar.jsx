@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
-const NavSidebar = () => {
+const NavSidebar = ({navLinks}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -10,10 +10,7 @@ const NavSidebar = () => {
         document.body.classList.toggle('sidebar-open');
     };
 
-    const navLinks = [
-        { to: '/', label: 'Home' },
-        { to: '/om-snussbox-as', label: 'Om Oss' },
-    ];
+
 
     return (
         <>

@@ -2,6 +2,7 @@
   "name": "untitled13",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server-part/service.js",
@@ -28,7 +29,7 @@
     "mongoose": "^9.1.5",
     "node-dev": "^8.0.0",
     "nodemailer": "^7.0.13",
-    "nodemon": "^3.1.11",
+    "nodemon": "^3.1.13",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-icons": "^5.5.0",
@@ -46,7 +47,6 @@
     "type": "git",
     "url": "git+https://github.com/zbtsk-js/Benji-app--Backend.git"
   },
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/zbtsk-js/Benji-app--Backend/issues"
   },

@@ -17,6 +17,7 @@
     --columns: 3;
     --padding-inline: #{rem(30)};
     width: 100%;
+    justify-content: center;
     @include tablet(){
       grid-template-columns: repeat(auto-fit, minmax(rem(400), 1fr));
       --padding-inline: #{rem(20)};

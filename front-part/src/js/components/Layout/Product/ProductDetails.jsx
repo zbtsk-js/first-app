@@ -1,8 +1,8 @@
 import {useParams} from "react-router-dom";
-import products from "./ProductData.js";
+import products from "../../../data/ProductData.js";
 import {useCart} from "../../../hooks/useCart";
 import {useState} from "react";
-export default function CardDetails() {
+export default function ProductDetails() {
     const {id} = useParams()
     const product = products.find(p => p.id == id)
 const [quantity, setQuantity] = useState(1)
