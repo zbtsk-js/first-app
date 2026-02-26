@@ -1,5 +1,5 @@
 import ProductCard from "./ProductCard.jsx";
-import products from "../../../data/ProductData.js";
+import products from "../../../../../../server-part/data/ProductData.js";
 
 
 

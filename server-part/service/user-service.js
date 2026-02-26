@@ -42,7 +42,9 @@ return  {
         const userDto = new UserDto(User)
         const tokens = await TokenService.generateToken({...userDto})
         await TokenService.SaveToken(userDto.id, tokens.RefreshToken)
-        return tokens
+        return  {
+            ...tokens, user: userDto
+        }
     }
     async logout(refreshToken){
        const token = await TokenService.DeleteToken(refreshToken)
@@ -50,8 +52,8 @@ return  {
     }
      async refresh(RefreshToken){
         if(!RefreshToken){
-       return ApiError.UnauthorizedError()
-            }
+            throw ApiError.UnauthorizedError()
+        }
         const UserData =  await TokenService.ValidateRefreshToken(RefreshToken)
          const tokenFromDB = await TokenService.SearchToken(RefreshToken)
          if(!tokenFromDB||!UserData){
@@ -62,7 +64,9 @@ return  {
          const userDto = new UserDto(User)
          const tokens = await TokenService.generateToken({...userDto})
          await TokenService.SaveToken(userDto.id, tokens.RefreshToken)
-         return tokens
+         return {
+             ...tokens, user: userDto
+         }
 
      }
 }

@@ -1,11 +1,11 @@
 import {Router } from "express";
 import {AuthController} from "../controllers/AuthController.js";
+import {PaymentController} from "../controllers/PaymentController.js";
 import  {body} from "express-validator";
-import AuthMiddleware from "../Middlewares/AuthMiddleware.js";
-
 const router = Router();
-const AuthService = new AuthController();
 
+const AuthService = new AuthController();
+const PaymentService = new PaymentController();
 
 
 router.post('/login',  AuthService.login )
@@ -16,5 +16,8 @@ router.post('/register',[body('email').isEmail().withMessage('почта ука�
  router.get('/refresh', AuthService.refresh)
  router.get('/activate/:link', AuthService.activate)
 router.get('/users', AuthService.userstatus)
+router.post("/createPayment", PaymentService.CreatePayment)
+router.post("/webhook", PaymentService.Webhook)
+
 
 export default router;

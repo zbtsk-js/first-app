@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CartPage from "./Layout/Cart.jsx";
-import ProductDetails from "./Layout/Product/ProductDetails.jsx"
-import LegalInformation from "./Layout/AboutUsInfo/AboutUs.jsx";
-import Layout from "./Layout/Layout.jsx";
-import Hero from "./Layout/Hero/Hero.jsx";
+import CartPage from "./components/Layout/Cart.jsx";
+import ProductDetails from "./components/Layout/Product/ProductDetails.jsx"
+import LegalInformation from "./components/Layout/AboutUsInfo/AboutUs.jsx";
+import Layout from "./components/Layout/Layout.jsx";
+import Hero from "./components/Layout/Hero/Hero.jsx";
 function Mainroutes() {
     return (
         <Router>

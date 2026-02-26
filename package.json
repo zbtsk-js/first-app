@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mollie/api-client": "^4.4.0",
     "@types/axios": "^0.9.36",
     "axios": "^1.13.4",
     "bcrypt": "^6.0.0",
@@ -29,7 +30,7 @@
     "mongoose": "^9.1.5",
     "node-dev": "^8.0.0",
     "nodemailer": "^7.0.13",
-    "nodemon": "^3.1.13",
+    "nodemon": "^3.1.14",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-icons": "^5.5.0",

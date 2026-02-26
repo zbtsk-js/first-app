@@ -36,16 +36,14 @@ try{
     return res.redirect(process.env.CLIENT_URL)
 }catch(e){next(e)}
     }
-    async login(req, res){
+    async login(req, res, next){
         try {
             const {email, password} = req.body
-      const UserData = await UserService.Login(email, password)
+            const UserData = await UserService.Login(email, password)
             res.cookie('refreshToken', UserData.RefreshToken, {httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000}) // 30 дней
-        return res.json(UserData)
-            }
-
-        catch (error) {
-
+            return res.json(UserData)
+        } catch (error) {
+            next(error)
         }
     }
     async userstatus(req, res){
@@ -57,11 +55,15 @@ try{
             return res.status(500).json({ error: 'failed to fetch users'})
         }
     }
-    async logout(req, res){
-        const {refreshToken} = req.cookies
-        res.clearCookie('refreshToken')
-       const token = await UserService.logout(refreshToken)
-        return res.json(token)
+    async logout(req, res, next){
+        try {
+            const {refreshToken} = req.cookies
+            res.clearCookie('refreshToken')
+            const token = await UserService.logout(refreshToken)
+            return res.json(token)
+        } catch (e) {
+            next(e)
+        }
     }
     async refresh(req, res, next) {
         try {
@@ -70,7 +72,7 @@ try{
             res.cookie('refreshToken', userData.RefreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData);
         } catch (e) {
-            console.log(e)
+            next(e)
         }
     }
 

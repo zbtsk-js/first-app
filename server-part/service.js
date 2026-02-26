@@ -4,7 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import router from "./routers/Router.js";
 import dotenv from 'dotenv'
-import errorMiddleware from "./Middlewares/error-middleware.js";'./Middlewares/error-middleware.js'
+import errorMiddleware from "./Middlewares/error-middleware.js";
 dotenv.config()
 const Port = process.env.PORT || 3000  ;
 const app = express();

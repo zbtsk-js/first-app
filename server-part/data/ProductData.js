@@ -28,6 +28,6 @@ const products = [
         imageSrc: "/images/product-card.jpg",
         imageAlt: "Product image",
         quantity: 1
-    }
+    },
 ];
 export default  products
