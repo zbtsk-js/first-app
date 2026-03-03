@@ -14,7 +14,7 @@ const PaymentRedirect =  () => {
                 if(!orderID) return;
                 const orderData = await PaymentService.getOrderStatus(orderID);
                 setOrder(orderData)
-                console.log(orderData)
+                console.log(order)
                 if(orderData.status === 'pending') {
                     timeout = setTimeout(checkStatus, 3000);
                 }
@@ -27,6 +27,9 @@ const PaymentRedirect =  () => {
 
 
        }, [orderID])
+    useEffect(() => {
+        console.log(order)
+    }, [order])
         if (!order) return <div>⏳ Проверяем оплату...</div>;
         if (order.status === "paid") return <h1>✅ Спасибо за покупку!</h1>;
         if (order.status === "canceled" || order.status === "failed") return <h1>❌ Оплата не прошла</h1>;

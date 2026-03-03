@@ -12,6 +12,7 @@ export class PaymentController {
     async Webhook(req, res){
         try {
             const { id } = req.body
+            console.log(id)
             await PaymentService.HandleWebhook(id)
             res.sendStatus(200)
         } catch (err) {
