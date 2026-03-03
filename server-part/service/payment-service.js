@@ -15,6 +15,10 @@ class PaymentService{
        await order.save();
        return payment;
    }
+   async getOrder(orderId){
+           const order = await Order.findById(orderId);
+           return order;
+   }
    async HandleWebhook(paymentID){
        const payment = await MollieService.getPayment(paymentID)  //это функция которая будет вызываться самим MollieAPI роут для нее мы указывали при создании молли пеймента в WebhookURL, также есть роут для этого вебхука чтоб оно вызывало это функцию
        const OrderId = payment.metadata.orderId;
@@ -22,15 +26,14 @@ class PaymentService{
        if(!order){
            return null
        }
-       if (payment.isPaid()) {
+       if (payment.status === 'paid') {
            order.status = 'paid'
-       } else if (payment.isCanceled()) {
+       } else if (payment.status === 'canceled') {
            order.status = 'canceled'
-       } else if (payment.isFailed()) {
+       } else if (payment.status === 'failed') {
            order.status = 'failed'
        }
        await order.save();
-       return order
    }
 }
 export default new PaymentService()

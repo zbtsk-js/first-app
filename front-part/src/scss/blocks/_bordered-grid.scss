@@ -11,7 +11,8 @@
   &--2cols {
     --columns: 2;
     --paddingInline: #{rem(20)};
-
+    width: 100%;
+    justify-content: center;
   }
   &--3cols {
     --columns: 3;

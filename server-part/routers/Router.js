@@ -18,6 +18,7 @@ router.post('/register',[body('email').isEmail().withMessage('почта ука�
 router.get('/users', AuthService.userstatus)
 router.post("/createPayment", PaymentService.CreatePayment)
 router.post("/webhook", PaymentService.Webhook)
+router.get ('/order/:orderId', PaymentService.GetOrderInfo)
 
 
 export default router;
