@@ -9,7 +9,6 @@
 @use 'blocks/footer';
 @use 'blocks/hero';
 @use 'blocks/badge';
-@use 'blocks/button';
 @use 'blocks/product-section';
 @use 'blocks/product-card';
 @use 'blocks/bordered-grid';
@@ -22,3 +21,5 @@
 @use 'blocks/counter';
 @use 'blocks/sidebar-item';
 @use 'blocks/catalog';
+@use 'blocks/payment-redirect';
+@use 'blocks/payment-form';

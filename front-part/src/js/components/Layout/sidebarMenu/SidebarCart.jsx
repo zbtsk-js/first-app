@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import SideBarItem from "./SideBarItem.jsx";
 import {useCart} from "/front-part/src/js/hooks/useCart";
+import {Link} from "react-router-dom";
 
 const SidebarMenu = ({className}) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +20,7 @@ const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
                 )}
             </a>
 
-            <div
-                className={`sidebar-menu__overlay ${isOpen ? 'is-active' : ''}`}
-                onClick={toggleMenu}
-            />
+            <div className={`sidebar-menu__overlay ${isOpen ? 'is-active' : ''}`} onClick={toggleMenu}>
 
             <aside className={`sidebar-menu ${isOpen ? 'is-open' : ''}`}>
                 <div className="sidebar-menu__header">
@@ -45,9 +43,10 @@ const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
                         <span>Total:</span>
                         <span>{CartPriceSummary} NOK</span>
                     </div>
-                    <button disabled={CartPriceSummary <= 0} className='sidebar-menu__button button-primary'>Checkout</button>
+                    <Link to={`/checkOut`} disabled={CartPriceSummary <= 0} className='sidebar-menu__button button-primary' >Checkout</Link>
                 </div>
             </aside>
+        </div>
         </div>
     );
 };

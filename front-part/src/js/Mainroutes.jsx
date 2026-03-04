@@ -5,7 +5,8 @@ import LegalInformation from "./components/Layout/AboutUsInfo/AboutUs.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import Hero from "./components/Layout/Hero/Hero.jsx";
 import PaymentRedirect from "./pages/PaymentRedirect.jsx";
-import Catalog from "./pages/Catalog.jsx";
+import Catalog from "./components/Layout/Catalog.jsx";
+import PaymentForm from "./pages/PaymentForm.jsx";
 function Mainroutes() {
     return (
         <Router>
@@ -13,6 +14,7 @@ function Mainroutes() {
                 <Route element={<Layout/>}>
                 <Route path="/" element={<Hero />} />
                 <Route path="/cart" element={<CartPage/>} />
+                    <Route path="/checkout" element={<PaymentForm/>} />
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path = "/product/:id" element={<ProductDetails />} />
                 <Route path = "/om-snussbox-as" element={<LegalInformation/>} />

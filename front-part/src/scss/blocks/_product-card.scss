@@ -3,6 +3,7 @@
 .product-card {
   display: flex;
   flex-direction: column;
+  max-width: rem(335);
 
   &__image {
     border-radius: rem(10);
@@ -63,8 +64,6 @@
     color: rgba(255, 255, 255, 0.6);
   }
 
-  img {
-    width: fluid(410, 340);
-  }
+
 }
  

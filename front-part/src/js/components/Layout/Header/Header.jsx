@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import SidebarMenu from "../sidebarMenu/Sidebar.jsx";
+import SidebarMenu from "../sidebarMenu/SidebarCart.jsx";
 import NavSidebar from "../sidebarMenu/NavSidebar.jsx";
 
 const HeaderElemnt = () => {
