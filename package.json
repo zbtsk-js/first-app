@@ -8,7 +8,7 @@
     "dev": "nodemon server-part/service.js",
     "client": "vite",
     "start": "node server-part/service.js",
-    "build": "vite build",
+    "build": "vite build --outDir front-part/dist",
     "preview": "vite preview"
   },
   "keywords": [],
