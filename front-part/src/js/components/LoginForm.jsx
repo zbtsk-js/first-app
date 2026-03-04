@@ -18,13 +18,13 @@ const LoginForm  = () => {
                 onChange={e => setPassword(e.target.value)}
                 value={password}
                 type="password"
-                placeholder='Пароль'
+                placeholder='Password'
             />
             <button onClick={}>
-                Логин
+                Login
             </button>
             <button onClick={}>
-                Регистрация
+                Registration
             </button>
         </div>
     );

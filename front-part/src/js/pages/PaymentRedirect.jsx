@@ -38,8 +38,8 @@ const PaymentRedirect =  () => {
                     <div className="payment-redirect__icon">
                         <div className="loader"></div>
                     </div>
-                    <h1 className="payment-redirect__title">Проверка оплаты</h1>
-                    <p className="payment-redirect__text">Пожалуйста, подождите, мы проверяем статус вашего заказа...</p>
+                    <h1 className="payment-redirect__title">Checking payment</h1>
+                    <p className="payment-redirect__text">Please wait, we are checking your order status...</p>
                 </div>
             </div>
         );
@@ -55,9 +55,9 @@ const PaymentRedirect =  () => {
                             <path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                         </svg>
                     </div>
-                    <h1 className="payment-redirect__title">Оплата успешна!</h1>
-                    <p className="payment-redirect__text">Спасибо за покупку. Ваш заказ #{orderID} успешно оплачен и принят в обработку.</p>
-                    <Link to="/catalog" className="payment-redirect__btn button-primary">Вернуться в каталог</Link>
+                    <h1 className="payment-redirect__title">Payment successful!</h1>
+                    <p className="payment-redirect__text">Thank you for your purchase. Your order #{orderID} has been successfully paid and accepted for processing.</p>
+                    <Link to="/catalog" className="payment-redirect__btn button-primary">Back to catalog</Link>
                 </div>
             </div>
         );
@@ -68,9 +68,9 @@ const PaymentRedirect =  () => {
             <div className="payment-redirect payment-redirect--error">
                 <div className="payment-redirect__content">
                     <div className="payment-redirect__icon">❌</div>
-                    <h1 className="payment-redirect__title">Ошибка оплаты</h1>
-                    <p className="payment-redirect__text">К сожалению, оплата не прошла. Попробуйте еще раз или свяжитесь с поддержкой.</p>
-                    <Link to="/catalog" className="payment-redirect__btn">Вернуться к покупкам</Link>
+                    <h1 className="payment-redirect__title">Payment error</h1>
+                    <p className="payment-redirect__text">Unfortunately, the payment did not go through. Please try again or contact support.</p>
+                    <Link to="/catalog" className="payment-redirect__btn">Back to shopping</Link>
                 </div>
             </div>
         );
@@ -83,8 +83,8 @@ const PaymentRedirect =  () => {
                     <div className="payment-redirect__icon">
                         <div className="loader"></div>
                     </div>
-                    <h1 className="payment-redirect__title">Ожидаем оплату</h1>
-                    <p className="payment-redirect__text">Платеж обрабатывается. Это может занять несколько минут...</p>
+                    <h1 className="payment-redirect__title">Waiting for payment</h1>
+                    <p className="payment-redirect__text">Payment is being processed. This may take a few minutes...</p>
                 </div>
             </div>
         );

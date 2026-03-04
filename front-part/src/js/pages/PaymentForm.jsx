@@ -26,59 +26,59 @@ const onSubmit = async (data) => {
         window.location.href = PaymentLink;
     } catch (e) {
         console.error("Payment creation failed:", e);
-        alert("Произошла ошибка при создании платежа. Пожалуйста, попробуйте позже.");
+        alert("An error occurred while creating the payment. Please try again later.");
     }
 }
     return (
         <div className="payment-form-page">
             <div className="payment-form-page__inner container">
                 <form className="payment-form-page__left"  id="payment-form" onSubmit={handleSubmit(onSubmit)} >
-                    <h1 className="payment-form-page__title">Оформление заказа</h1>
+                    <h1 className="payment-form-page__title">Checkout</h1>
 
                     <div className="payment-form-page__group">
-                        <label htmlFor="email">Электронная почта</label>
+                        <label htmlFor="email">Email address</label>
                         <input
                             type="email"
                             id="email"
                             className="payment-form-page__input"
                             placeholder="example@mail.com"
                             {...register('email', {
-                                required: 'Введите email'
+                                required: 'Enter email'
                             })}
                         />
                         {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
                     </div>
 
                     <div className="payment-form-page__shipping-section">
-                        <h2 className="payment-form-page__section-title">Адрес доставки</h2>
+                        <h2 className="payment-form-page__section-title">Shipping Address</h2>
                         <div className="payment-form-page__row">
                             <div className="payment-form-page__group">
-                                <label htmlFor="firstName">Имя</label>
+                                <label htmlFor="firstName">First name</label>
                                 <input
                                     type="text"
                                     id="firstName"
                                     className="payment-form-page__input"
-                                    placeholder="Иван"
+                                    placeholder="Ivan"
                                     {...register('firstName', {
-                                        required: 'Введите имя',
-                                        minLength: { value: 2, message: 'Имя слишком короткое' },
-                                        maxLength: { value: 50, message: 'Имя слишком длинное' }
+                                        required: 'Enter first name',
+                                        minLength: { value: 2, message: 'First name is too short' },
+                                        maxLength: { value: 50, message: 'First name is too long' }
                                     })}
                                 />
                                 {errors.firstName && <p style={{ color: 'red' }}>{errors.firstName.message}</p>}
                             </div>
 
                             <div className="payment-form-page__group">
-                                <label htmlFor="lastName">Фамилия</label>
+                                <label htmlFor="lastName">Last name</label>
                                 <input
                                     type="text"
                                     id="lastName"
                                     className="payment-form-page__input"
-                                    placeholder="Иванов"
+                                    placeholder="Ivanov"
                                     {...register('lastName', {
-                                        required: 'Введите фамилию',
-                                        minLength: { value: 2, message: 'Фамилия слишком короткая' },
-                                        maxLength: { value: 50, message: 'Фамилия слишком длинная' },
+                                        required: 'Enter last name',
+                                        minLength: { value: 2, message: 'Last name is too short' },
+                                        maxLength: { value: 50, message: 'Last name is too long' },
                                     })}
                                 />
                                 {errors.lastName && <p style={{ color: 'red' }}>{errors.lastName.message}</p>}
@@ -86,16 +86,16 @@ const onSubmit = async (data) => {
                         </div>
 
                         <div className="payment-form-page__group">
-                            <label htmlFor="address">Адрес</label>
+                            <label htmlFor="address">Address</label>
                             <input
                                 type="text"
                                 id="address"
                                 className="payment-form-page__input"
-                                placeholder="Улица, дом, квартира"
+                                placeholder="Street, house, apartment"
                                 {...register('address', {
-                                    required: 'Введите адрес',
-                                    minLength: { value: 5, message: 'Адрес слишком короткий' },
-                                    maxLength: { value: 100, message: 'Адрес слишком длинный' },
+                                    required: 'Enter address',
+                                    minLength: { value: 5, message: 'Address is too short' },
+                                    maxLength: { value: 100, message: 'Address is too long' },
                                 })}
                             />
                             {errors.address && <p style={{ color: 'red' }}>{errors.address.message}</p>}
@@ -103,33 +103,33 @@ const onSubmit = async (data) => {
 
                         <div className="payment-form-page__row">
                             <div className="payment-form-page__group">
-                                <label htmlFor="city">Город</label>
+                                <label htmlFor="city">City</label>
                                 <input
                                     type="text"
                                     id="city"
                                     className="payment-form-page__input"
                                     placeholder="Oslo"
                                     {...register('city', {
-                                        required: 'Введите город',
-                                        minLength: { value: 2, message: 'Название города слишком короткое' },
-                                        maxLength: { value: 50, message: 'Название города слишком длинное' },
+                                        required: 'Enter city',
+                                        minLength: { value: 2, message: 'City name is too short' },
+                                        maxLength: { value: 50, message: 'City name is too long' },
                                     })}
                                 />
                                 {errors.city && <p style={{ color: 'red' }}>{errors.city.message}</p>}
                             </div>
 
                             <div className="payment-form-page__group">
-                                <label htmlFor="postcode">Почтовый индекс</label>
+                                <label htmlFor="postcode">Postal code</label>
                                 <input
                                     type="text"
                                     id="postcode"
                                     className="payment-form-page__input"
                                     placeholder="101000"
                                     {...register('postcode', {
-                                        required: 'Введите почтовый индекс',
-                                        minLength: { value: 4, message: 'Почтовый индекс должен быть минимум 4 цифры' },
-                                        maxLength: { value: 10, message: 'Почтовый индекс слишком длинный' },
-                                        pattern: { value: /^[0-9]+$/, message: 'Только цифры допустимы' },
+                                        required: 'Enter postal code',
+                                        minLength: { value: 4, message: 'Postal code must be at least 4 digits' },
+                                        maxLength: { value: 10, message: 'Postal code is too long' },
+                                        pattern: { value: /^[0-9]+$/, message: 'Only digits are allowed' },
                                         valueAsNumber: true
                                     })}
                                 />
@@ -138,13 +138,13 @@ const onSubmit = async (data) => {
                         </div>
 
                         <div className="payment-form-page__group">
-                            <label htmlFor="country">Страна</label>
+                            <label htmlFor="country">Country</label>
                             <Select id="country" className="payment-form-page__input" options={Countries}/>
                         </div>
                     </div>
 
                     <div className="payment-form-page__payment-section">
-                        <h2 className="payment-form-page__section-title">Способ оплаты</h2>
+                        <h2 className="payment-form-page__section-title">Payment Method</h2>
                         <div className="payment-form-page__methods">
                             <div className="payment-form-page__method payment-form-page__method--active">
                                 <div className="payment-form-page__method-icon">
@@ -154,7 +154,7 @@ const onSubmit = async (data) => {
                                     </svg>
                                 </div>
                                 <div className="payment-form-page__method-info">
-                                    <span className="payment-form-page__method-name">Кредитная карта</span>
+                                    <span className="payment-form-page__method-name">Credit card</span>
                                     <span className="payment-form-page__method-desc">Visa, MasterCard</span>
                                 </div>
                                 <div className="payment-form-page__method-radio"></div>
@@ -164,7 +164,7 @@ const onSubmit = async (data) => {
                 </form>
 
                 <div className="payment-form-page__right">
-                    <h2 className="payment-form-page__section-title">Ваш заказ</h2>
+                    <h2 className="payment-form-page__section-title">Your order</h2>
                     <div className="payment-form-page__items-list">
                         {cart.map(item => (
                             <div key={item.id} className="payment-form-page__item">
@@ -181,21 +181,21 @@ const onSubmit = async (data) => {
 
                     <div className="payment-form-page__summary">
                         <div className="payment-form-page__summary-row">
-                            <span>Подытог</span>
+                            <span>Subtotal</span>
                             <span>{CartPriceSummary} NOK</span>
                         </div>
                         <div className="payment-form-page__summary-row">
-                            <span>Доставка</span>
-                            <span>Бесплатно</span>
+                            <span>Shipping</span>
+                            <span>Free</span>
                         </div>
                         <div className="payment-form-page__summary-row payment-form-page__summary-row--total">
-                            <span>Итого</span>
+                            <span>Total</span>
                             <span>{CartPriceSummary} NOK</span>
                         </div>
                     </div>
 
                     <button className="payment-form-page__submit button-dark" disabled={isSubmitting} type="submit" form="payment-form">
-                        {isSubmitting ? 'Sending...' : `Betale ${CartPriceSummary} NOK`}
+                        {isSubmitting ? 'Sending...' : `Pay ${CartPriceSummary} NOK`}
                     </button>
                 </div>
             </div>
