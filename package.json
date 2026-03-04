@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server-part/service.js",
     "client": "vite",
-    "start": "vite",
+    "start": "node server-part/service.js",
     "build": "vite build",
     "preview": "vite preview"
   },
