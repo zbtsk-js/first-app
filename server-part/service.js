@@ -4,19 +4,15 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import router from "./routers/Router.js";
 import dotenv from 'dotenv';
-import errorMiddleware from "./Middlewares/error-middleware.js";
-import path from 'path';
-import { fileURLToPath } from 'url';
+
 
 dotenv.config();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
 // Если деплой, отключаем localhost CORS
 app.use(cors({
-    origin: process.env.CLIENT_URL || "*",
+    origin: true,
     credentials: true
 }));
 
@@ -26,16 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // API роуты
 app.use('/auth', router);
-
-// Обработка ошибок
-app.use(errorMiddleware);
-
-// --- Отдаём фронт React ---
-app.use(express.static(path.join(__dirname, '../frontend-part/dist')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend-part/dist', 'index.html'));
-});
 
 // Подключение к MongoDB и запуск сервера
 async function main() {

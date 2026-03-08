@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import SidebarMenu from "../sidebarMenu/SidebarCart.jsx";
 import NavSidebar from "../sidebarMenu/NavSidebar.jsx";
 
@@ -7,6 +8,7 @@ const HeaderElemnt = () => {
         { to: '/', label: 'Home' },
         { to: '/om-snussbox-as', label: 'Om Oss' },
         { to: '/catalog', label: 'Catalog' },
+        { to: '/profile', label: 'Profile' },
     ];
     return (
         <header 
@@ -70,17 +72,26 @@ const HeaderElemnt = () => {
                     </div>
                     <nav className='header__menu hidden-mobile'>
                         <ul className='header__menu-list'>
-                            {navLinks.map((link) => (
-                                <li className='header__menu-item'>
-                                <NavLink
-                                    to={link.to}
-                                    className={({isActive}) => isActive ? 'header__menu-link is-active' : 'header__menu-link'}
-                                >
-                                    {link.label}
-                                </NavLink>
-                                </li>
-                            ))}
-
+                            <motion.div layoutRoot style={{ display: 'contents' }}>
+                                {navLinks.map((link) => (
+                                    <li className='header__menu-item' key={link.to}>
+                                        <NavLink to={link.to} className={({ isActive }) => isActive ? 'header__menu-link is-active' : 'header__menu-link'}>
+                                            {({ isActive }) => (
+                                                <>
+                                                    {link.label}
+                                                    {isActive && (
+                                                        <motion.div
+                                                            layoutId="active-pill"
+                                                            className="header__menu-active-pill"
+                                                            transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+                                                        />
+                                                    )}
+                                                </>
+                                            )}
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </motion.div>
                         </ul>
                     </nav>
                     <div className='header__cart'>

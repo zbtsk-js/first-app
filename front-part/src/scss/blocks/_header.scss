@@ -15,56 +15,68 @@
     }
   }
 
-  &__menu{
-    &-list{
+  &__menu {
+    &-list {
       display: flex;
-      column-gap: rem(40);
+      column-gap: rem(8); // Reduced gap for a more compact, pill-like design
       align-items: center;
+      background: rgba(255, 255, 255, 0.03); // Very subtle background for the entire list
+      padding: rem(6);
+      border-radius: rem(40);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(4px);
 
-      @include phone{
+      @include phone {
         flex-direction: column;
         row-gap: rem(12);
+        background: none;
+        border: none;
+        backdrop-filter: none;
       }
-      @include laptop{
-        column-gap: rem(24);
+      @include laptop {
+        column-gap: rem(4);
       }
     }
-    &-link{
-      position: relative;
-      color: #fff;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.3s ease;
 
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        width: 0;
-        height: 2px;
-        background-color: #fff;
-        transition: width 0.3s ease;
-      }
+    &-link {
+      position: relative;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+      font-size: rem(14);
+      text-decoration: none;
+      transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: rem(8) rem(20);
+      border-radius: rem(32);
+      display: block;
+      z-index: 1;
 
       &:hover {
-        color: rgba(255, 255, 255, 0.8);
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
       }
 
-      &.is-active{
-        color: #fff;
+      &.is-active {
+        color: #000;
         pointer-events: none;
 
-        &::after {
-          width: 100%;
+        &:hover {
+          background: transparent;
         }
       }
 
-      &__contact-us-link{
-        max-width: 300px;
-        align-self: center;
-        width: 100%;
+      // Removing the old underline effect
+      &::after {
+        display: none;
       }
+    }
+
+    &-active-pill {
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      border-radius: rem(32);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+      z-index: -1;
     }
   }
 
@@ -118,4 +130,5 @@
     opacity: 1;
   }
 }
+
 

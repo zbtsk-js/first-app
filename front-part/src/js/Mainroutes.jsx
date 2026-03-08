@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CartPage from "./components/Layout/Cart.jsx";
+import CartPage from "./pages/Cart.jsx";
 import ProductDetails from "./components/Layout/Product/ProductDetails.jsx"
 import LegalInformation from "./components/Layout/AboutUsInfo/AboutUs.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import Hero from "./components/Layout/Hero/Hero.jsx";
 import PaymentRedirect from "./pages/PaymentRedirect.jsx";
-import Catalog from "./components/Layout/Catalog.jsx";
+import Catalog from "./components/Layout/Catalog/Catalog.jsx";
 import PaymentForm from "./pages/PaymentForm.jsx";
+import Profile from "./components/Layout/Profile.jsx";
 function Mainroutes() {
     return (
         <Router>
@@ -18,7 +19,8 @@ function Mainroutes() {
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path = "/product/:id" element={<ProductDetails />} />
                 <Route path = "/om-snussbox-as" element={<LegalInformation/>} />
-                    <Route path= "/success" element={ <PaymentRedirect/>}/>
+                    <Route path = "/success" element={ <PaymentRedirect/>}/>
+                    <Route path = "/profile" element={<Profile />} />
                 </Route>
             </Routes>
         </Router>

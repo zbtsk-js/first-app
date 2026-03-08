@@ -22,6 +22,10 @@ return  {
             ...tokens, user: userDto
 }
     }
+    async LazyRegister(email){
+const registrationLink = uuidv4()
+        const Lazyuser = await UserModule.create({email, password: registrationLink})
+    }
     async LinkActivation(link){
        const User = await UserModule.findOne({activationLink: link})
         if(!User){

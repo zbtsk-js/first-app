@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, ShoppingCart } from 'lucide-react';
 import SideBarItem from "./SideBarItem.jsx";
 import {useCart} from "/front-part/src/js/hooks/useCart";
 import {Link} from "react-router-dom";
@@ -7,22 +7,26 @@ import {Link} from "react-router-dom";
 const SidebarMenu = ({className}) => {
     const [isOpen, setIsOpen] = useState(false);
 const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
+    useEffect(() => {
+        document.body.classList.toggle('sidebar-open', isOpen);
+    }, [isOpen]);
     const toggleMenu = () => {
         setIsOpen(prev => !prev);
-        document.body.classList.toggle('sidebar-open');
     };
 
     return (
         <div className="header__cart-wrapper">
             <a onClick={toggleMenu} className={className}>
-                Cart
+                <ShoppingCart size={20} />
                 {CartQuantitySummary > 0 && (<span className="cart-count" > {CartQuantitySummary} </span>
                 )}
             </a>
 
             <div className={`sidebar-menu__overlay ${isOpen ? 'is-active' : ''}`} onClick={toggleMenu}>
 
-            <aside className={`sidebar-menu ${isOpen ? 'is-open' : ''}`}>
+            <aside className={`sidebar-menu ${isOpen ? 'is-open' : ''}`} onClick={(e)=>{
+            e.stopPropagation()
+            }}>
                 <div className="sidebar-menu__header">
                     <h2 className="sidebar-menu__title">Cart</h2>
                     <button className="sidebar-menu__close" onClick={toggleMenu}>

@@ -1,6 +1,7 @@
 import MollieService from "./mollie-service.js";
 import Order from "../Models/Order.js";
 import ProductData from "../data/ProductData.js";
+import OrderService from "./order-service.js";
 
 class PaymentService{
    async createOrder({email, items}){
@@ -9,7 +10,7 @@ class PaymentService{
            if (!product) throw new Error('Product not found')
            return total + (product.price * item.quantity)
        }, 0)
-       const order = await Order.create({email, amount, items, status: 'pending'})
+       const order = await OrderService.createOrder({email, amount, items})
        const payment = await MollieService.createPayment(order)
        order.mollieId = payment.id;
        await order.save();

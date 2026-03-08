@@ -16,7 +16,6 @@ const PaymentRedirect =  () => {
                 if(!orderID) return;
                 const orderData = await PaymentService.getOrderStatus(orderID);
                 setOrder(orderData)
-                console.log(order)
                 if(orderData.status === 'pending') {
                     timeout = setTimeout(checkStatus, 3000);
                 }

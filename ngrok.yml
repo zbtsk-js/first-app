@@ -1,0 +1,9 @@
+tunnels:
+  frontend:
+    addr: 3000
+    proto: http
+    # subdomain: myfrontend  # если у вас платная версия ngrok
+  backend:
+    addr: 5000
+    proto: http
+    # subdomain: mybackend   # если платная версия
