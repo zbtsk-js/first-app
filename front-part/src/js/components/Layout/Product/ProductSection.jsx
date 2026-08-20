@@ -1,9 +1,9 @@
 import ProductCard from "./ProductCard.jsx";
-import products from "../../../../../../server-part/data/ProductData.js";
+import ProductStore from "../../../stores/ProductStore.js";
+import {observer} from "mobx-react-lite";
 
 
-
-export default function ProductSection({ title, subtitle}) {
+const ProductSection = observer(({ title, subtitle}) => {
 
     return (
         <div id="collection" className="product-section container">
@@ -17,9 +17,9 @@ export default function ProductSection({ title, subtitle}) {
                     role="list"
                 >
 
-                    {products.map(product => (
+                    {ProductStore.products.map(product => (
                             <li 
-                                key={product.id}
+                                key={product._id || product.id}
                                 className="bordered-grid__item" 
                                 role="listitem"
                             >
@@ -36,4 +36,6 @@ export default function ProductSection({ title, subtitle}) {
                 </div>
             </div>
     );
-}
+});
+
+export default ProductSection;

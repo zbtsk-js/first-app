@@ -3,7 +3,7 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  max-width: rem(335);
+  align-items: center;
 
   &__image {
     border-radius: rem(10);

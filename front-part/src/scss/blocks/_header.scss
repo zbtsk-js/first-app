@@ -85,6 +85,28 @@
     border: none;
   }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+  }
+
+  &__user-link {
+    color: #fff;
+    @include square(rem(40));
+    border-radius: 50%;
+    @include flex-center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+  }
+
   &__cart {
     &-wrapper {
       position: relative;

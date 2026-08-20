@@ -1,23 +1,29 @@
 import PaymentService from "/front-part/src/js/services/PaymentService.js";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-
+import {AuthContext} from "../main.jsx";
+import {observer} from "mobx-react-lite";
+import {useCart} from "../hooks/useCart.js";
 
 const PaymentRedirect =  () => {
     const params = new URLSearchParams(window.location.search);
     const orderID = params.get("orderID");
     const [order, setOrder] = useState(null);
-
+    const {AuthStore} = useContext(AuthContext);
+    const {clearCart} = useCart()
     useEffect(() => {
-
             let timeout
             const checkStatus = async () => {
                 try {
                 if(!orderID) return;
-                const orderData = await PaymentService.getOrderStatus(orderID);
-                setOrder(orderData)
+                const orderData = await PaymentService.checkOrder(orderID);
+                    await AuthStore.checkAuth()
+                    setOrder(orderData)
                 if(orderData.status === 'pending') {
                     timeout = setTimeout(checkStatus, 3000);
+                }
+                else if(orderData.status === 'paid') {
+                    clearCart()
                 }
             }catch (e) {
                     console.error(e)
@@ -45,6 +51,7 @@ const PaymentRedirect =  () => {
     }
 
     if (order.status === "paid") {
+
         return (
             <div className="payment-redirect payment-redirect--success">
                 <div className="payment-redirect__content">
@@ -60,6 +67,8 @@ const PaymentRedirect =  () => {
                 </div>
             </div>
         );
+
+
     }
 
     if (order.status === "canceled" || order.status === "failed") {
@@ -92,5 +101,5 @@ const PaymentRedirect =  () => {
     return null;
 };
 
-export default PaymentRedirect;
+export default observer(PaymentRedirect);
 

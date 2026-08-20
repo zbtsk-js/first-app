@@ -1,34 +1,63 @@
 import React from 'react';
+import {useEffect} from 'react';
 import {useCart} from "/front-part/src/js/hooks/useCart.js";
 import Select from 'react-select';
 import { useForm } from 'react-hook-form';
 import PaymentService from "../services/PaymentService.js";
+import AuthService from "../services/AuthService.js";
 const PaymentForm = () => {
+    const {register, reset, getValues, handleSubmit, formState: { errors, isSubmitting }} = useForm();
     const {cart, CartPriceSummary} = useCart();
-    const {register, handleSubmit, formState: { errors, isSubmitting }} = useForm();
-
     const Countries = [
         { value: 'Norway', label: 'Norway' },
         { value: 'Sweden', label: 'Sweden' },
         { value: 'Denmark', label: 'Denmark' }
     ];
-const onSubmit = async (data) => {
+    const onSubmit = async (data) => {
     try {
         const payload = {
             "items": cart.map(item => ({
                 productId: item.id,
-                quantity: item.quantity
-            })),
-            "email": data.email
+                quantity: item.quantity,
+                imageSrc: item.imageSrc,})),
+
+            "email": data.email,
+            "firstName": data.firstName,
+            "lastName": data.lastName,
+            "address": data.address,
+            "city": data.city,
+            "country": data.country,
+            "postcode": data.postcode,
         }
+
         const res = await PaymentService.createPayment(payload)
         const PaymentLink = res.data.checkoutUrl
         window.location.href = PaymentLink;
     } catch (e) {
         console.error("Payment creation failed:", e);
-        alert("An error occurred while creating the payment. Please try again later.");
     }
 }
+    const CheckEmail = async (email) => {
+    if(!email) return;
+    console.log('Email requested: ', email)
+    try {
+        const res = await AuthService.checkifEmailexists(email)
+        if(res.exists) {
+            return 'Email already exists, login or use another email'
+        }
+        return true
+    }catch (e) {
+        console.error("Email check failed:", e);
+        return true
+    }
+
+}
+
+    useEffect(() => {
+        const saved = JSON.parse(localStorage.getItem('Forminfo'));
+        if (saved) reset(saved); // сброс с сохранёнными значениями
+    }, [reset]);
+
     return (
         <div className="payment-form-page">
             <div className="payment-form-page__inner container">
@@ -43,7 +72,8 @@ const onSubmit = async (data) => {
                             className="payment-form-page__input"
                             placeholder="example@mail.com"
                             {...register('email', {
-                                required: 'Enter email'
+                                required: 'Enter email',
+                                validate: CheckEmail
                             })}
                         />
                         {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}

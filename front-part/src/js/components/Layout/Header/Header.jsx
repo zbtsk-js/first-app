@@ -1,14 +1,18 @@
 import { Link, NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { User } from 'lucide-react'
+import {observer} from 'mobx-react-lite';
 import SidebarMenu from "../sidebarMenu/SidebarCart.jsx";
 import NavSidebar from "../sidebarMenu/NavSidebar.jsx";
-
+import { AuthContext } from '/front-part/src/js/main.jsx';
+import {useContext} from "react";
 const HeaderElemnt = () => {
-    const navLinks = [
+    const {AuthStore} = useContext(AuthContext);
+    let navLinks = [
         { to: '/', label: 'Home' },
         { to: '/om-snussbox-as', label: 'Om Oss' },
         { to: '/catalog', label: 'Catalog' },
-        { to: '/profile', label: 'Profile' },
+        ...(AuthStore.isAuth ? [{ to: '/profile', label: 'Profile' }] : [])
     ];
     return (
         <header 
@@ -94,12 +98,17 @@ const HeaderElemnt = () => {
                             </motion.div>
                         </ul>
                     </nav>
-                    <div className='header__cart'>
-                        <SidebarMenu className='header__cart-button button--accent' />
+                    <div className='header__actions'>
+                        <Link to="/login" className="header__user-link">
+                            <User size={20} />
+                        </Link>
+                        <div className='header__cart'>
+                            <SidebarMenu className='header__cart-button button--accent' />
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
     )
 }
-export default HeaderElemnt
+export default observer(HeaderElemnt)

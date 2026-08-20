@@ -9,7 +9,7 @@ export default function Heroheader() {
                             Premium quality snus
                         </span>
                         <h1>
-                            Premium Storage Solutions
+                            Unique Schniiii boxes
                         </h1>
                         <p className="hero__description">
                             Elegantly crafted containers designed to preserve and protect. Minimalist Scandinavian aesthetics meet exceptional functionality.
@@ -22,7 +22,7 @@ export default function Heroheader() {
                         </a>
                     </div>
                     <div className="hero__header-image">
-                        <img src='/images/product-card.jpg' alt="Premium Snus Box" />
+                        <img src='/images/main-product.jpg' alt="Premium Snus Box" />
                     </div>
                     <a
                         className="button button-primary hero__button is-mobile"

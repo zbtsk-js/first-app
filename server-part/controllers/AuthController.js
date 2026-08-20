@@ -1,13 +1,24 @@
- import UserService from "../service/user-service.js";
-import User from "../Models/User.js"
 import {validationResult} from "express-validator";
 import dotenv from 'dotenv'
 import {ApiError} from "../exceptions/exceptions.js";
-import {json} from "express";
 dotenv.config()
 
 export class AuthController{
-    async registration(req, res,next)  {
+    constructor(UserService) {
+        this.UserService = UserService;
+    }
+    _setAuthCookie = (res, refreshToken) => {
+        // 30 дней
+        const maxAge = 30 * 24 * 60 * 60 * 1000
+        res.cookie('refreshToken', refreshToken, {
+
+            httpOnly: true,
+            maxAge: maxAge,
+            sameSite: 'lax',
+            // secure: true // включите, если используете HTTPS
+        });
+    }
+    registration = async (req, res, next) => {
         try {
             const {email, password} = req.body
             const errors = validationResult(req)
@@ -20,62 +31,89 @@ export class AuthController{
             if(!errors.isEmpty()){
                 throw ApiError.BadRequestError('Validation error', FormattedErrors)
             }
-            const UserData = await UserService.Registration(email, password)
-res.cookie('refreshToken', UserData.RefreshToken, {httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 // 30 дней
+            const UserData = await this.UserService.Registration(email, password)
+            this._setAuthCookie(res, UserData.RefreshToken)
 
-})
             return res.json(UserData)
         } catch (error) {
             next(error)
         }
     }
-    async activate(req, res, next){
+    activate = async (req, res, next) => {
 try{
     const ActivationLink = req.params.link
-    await UserService.LinkActivation(ActivationLink)
+    await this.UserService.LinkActivation(ActivationLink)
     return res.redirect(process.env.CLIENT_URL)
 }catch(e){next(e)}
     }
-    async login(req, res, next){
+    login = async (req, res, next) => {
         try {
             const {email, password} = req.body
-            const UserData = await UserService.Login(email, password)
-            res.cookie('refreshToken', UserData.RefreshToken, {httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000}) // 30 дней
+            const UserData = await this.UserService.Login(email, password)
+            this._setAuthCookie(res, UserData.RefreshToken)
             return res.json(UserData)
         } catch (error) {
             next(error)
         }
     }
-    async userstatus(req, res){
-        try {
-        const users = await User.find()
-        return res.json(users)
-        } catch (error) {
-            console.error(error)
-            return res.status(500).json({ error: 'failed to fetch users'})
-        }
-    }
-    async logout(req, res, next){
+    logout = async (req, res, next) => {
         try {
             const {refreshToken} = req.cookies
             res.clearCookie('refreshToken')
-            const token = await UserService.logout(refreshToken)
+            const token = await this.UserService.logout(refreshToken)
             return res.json(token)
         } catch (e) {
             next(e)
         }
     }
-    async refresh(req, res, next) {
+    refresh = async (req, res, next) => {
         try {
             const {refreshToken} = req.cookies;
-            const userData = await UserService.refresh(refreshToken);
-            res.cookie('refreshToken', userData.RefreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
-            return res.json(userData);
+            const UserData = await this.UserService.refresh(refreshToken);
+            this._setAuthCookie(res, UserData.RefreshToken)
+            return res.json(UserData);
         } catch (e) {
             next(e)
         }
     }
+    checkifEmailexists = async (req, res, next) => {
+        try {
+            const email = req.query.email
+            const EmailExists = await this.UserService.checkifEmailexists(email)
+            return res.json(EmailExists)
+        }catch(e){
+next(e)        }
 
+    }
+    getEmailbyTheLink = async (req, res, next) => {
+        try {
+            const registrationToken = req.query.registrationToken
+            const Userdata = await this.UserService.getEmailbyTheLink(registrationToken)
+            return res.json(Userdata)
+        }catch(e){
+            next(e)
+        }
 
+    }
+    lazyActivation = async (req, res, next) => {
+        try {
+            const {registrationToken, password} = req.body
+            const UserData = await this.UserService.LazyActivation(registrationToken, password)
+            this._setAuthCookie(res, UserData.RefreshToken)
+            return res.json(UserData)
+        }catch(e){
+next(e)        }
+    }
+    googleLogin = async (req, res, next) => {
+        try {
+            const {credential} = req.body
+            const UserData = await this.UserService.GoogleLogin(credential)
+            this._setAuthCookie(res, UserData.RefreshToken)
+
+            return res.json(UserData)
+        }catch(e){
+            next(e)
+        }
+    }
 }
 

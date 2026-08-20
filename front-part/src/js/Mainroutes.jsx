@@ -7,7 +7,9 @@ import Hero from "./components/Layout/Hero/Hero.jsx";
 import PaymentRedirect from "./pages/PaymentRedirect.jsx";
 import Catalog from "./components/Layout/Catalog/Catalog.jsx";
 import PaymentForm from "./pages/PaymentForm.jsx";
-import Profile from "./components/Layout/Profile.jsx";
+import Profile from "./pages/Profile.jsx";
+import AuthForm from "./pages/AuthForm.jsx";
+import Signupform from "./pages/Signupform.jsx";
 function Mainroutes() {
     return (
         <Router>
@@ -21,6 +23,8 @@ function Mainroutes() {
                 <Route path = "/om-snussbox-as" element={<LegalInformation/>} />
                     <Route path = "/success" element={ <PaymentRedirect/>}/>
                     <Route path = "/profile" element={<Profile />} />
+                    <Route path = "/login" element={<Signupform />} />
+                    <Route path = "/lazyregisterForm/:registrationToken" element={<AuthForm/>} />
                 </Route>
             </Routes>
         </Router>

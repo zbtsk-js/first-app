@@ -1,9 +1,12 @@
 @use '../helpers' as *;
+
 .product-details {
-  padding: 60px 24px;
+  background: #000000;
+  color: #fff;
+  padding: 80px 24px 75px;
 
   @include phone {
-    padding: 30px 16px;
+    padding: 40px 16px 80px;
   }
 
   &__container {
@@ -13,12 +16,12 @@
     align-items: start;
 
     @include tablet {
-      gap: 40px;
+      gap: 50px;
     }
 
     @include phone {
       grid-template-columns: 1fr;
-      gap: 32px;
+      gap: 40px;
     }
   }
 
@@ -32,240 +35,183 @@
   }
 
   &__image-wrapper {
-    background-color: #f9f9f9;
-    border-radius: 12px;
+    background: #0000;
+    border-radius: 20px;
     overflow: hidden;
     aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
 
-    @include phone {
-      border-radius: 8px;
+    &:hover {
+      transform: scale(1.2);
     }
   }
 
   &__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-
-    &:hover {
-      transform: scale(1.05);
-    }
+    width: 92%;
+    height: 92%;
+    object-fit: contain;
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
+  // === Правая колонка ===
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 
   &__title {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #1a1a1a;
-    line-height: 1.2;
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin: 0;
 
     @include phone {
-      font-size: 28px;
+      font-size: 38px;
     }
   }
 
   &__subtitle {
     font-size: 18px;
-    color: #666;
-    margin-bottom: 24px;
-
-    @include phone {
-      font-size: 16px;
-      margin-bottom: 16px;
-    }
+    color: #aaa;
+    margin: 0;
+    font-weight: 500;
   }
 
   &__price-wrapper {
     display: flex;
     align-items: baseline;
     gap: 12px;
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #eee;
-
-    @include phone {
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-    }
   }
 
   &__price {
-    font-size: 28px;
-    font-weight: 600;
-    color: #1a1a1a;
+    font-size: rem(42);
+    letter-spacing: -0.02em;
 
     @include phone {
-      font-size: 24px;
+      font-size: 34px;
     }
   }
 
   &__vat {
-    font-size: 14px;
+    font-size: 16px;
     color: #888;
+    align-self: flex-end;
+    margin-bottom: 4px;
   }
 
+  // Бейджи
   &__info-badges {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 32px;
-
-    @include phone {
-      gap: 12px;
-      margin-bottom: 24px;
-    }
+    flex-direction: column;
+    gap: 12px;
   }
 
   .info-badge {
+    padding: 10px 16px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #f5f5f5;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 13px;
 
     @include phone {
-      padding: 6px 10px;
-      font-size: 12px;
-      flex: 1 1 calc(50% - 12px);
+      flex: 1 1 100%;
       justify-content: center;
-    }
-
-    &__icon {
-      font-size: 16px;
-    }
-
-    &__text {
-      font-weight: 500;
     }
   }
 
+  // Описание
   &__description {
-    line-height: 1.7;
-    color: #000;
-    margin-bottom: 32px;
     font-size: 16px;
-
-    @include phone {
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
+    line-height: 1.7;
+    color: #ccc;
   }
 
   &__spec {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 4px;
-
-
+    font-size: 15px;
+    color: #999;
+    margin: 8px 0;
   }
 
+  // Действия
   &__actions {
+    margin-top: 16px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    margin-bottom: 40px;
-    padding: 24px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-
-    @include phone {
-      padding: 16px;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+    gap: 20px;
   }
 
   .quantity-selector {
     display: flex;
+    align-items: center;
+    gap: 16px;
     flex-direction: column;
-    gap: 8px;
+    align-self: start;
 
     &__label {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
       color: #888;
+      white-space: nowrap;
     }
 
     &__controls {
       display: flex;
       align-items: center;
-      width: fit-content;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
       overflow: hidden;
     }
 
     &__btn {
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
+      background: transparent;
       border: none;
-      background: #fff;
-      cursor: pointer;
-      font-size: 18px;
-      transition: background 0.2s;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 600;
 
       &:hover {
-        background: #f0f0f0;
-      }
-
-      &:active {
-        background: #e0e0e0;
+        background: #222;
       }
     }
 
     &__value {
-      width: 40px;
+      min-width: 60px;
       text-align: center;
-      font-weight: 600;
-      border-left: 1px solid #ddd;
-      border-right: 1px solid #ddd;
-      line-height: 40px;
+      font-size: 18px;
+      font-weight: 700;
     }
   }
 
-
   &__add-btn {
-    width: 100%;
-    padding: 18px;
-    background-color: #1a1a1a;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
+    height: 58px;
+    background: #fff;
+    color: #000;
+    font-weight: 800;
     font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
+    border-radius: 12px;
+    border: none;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    @include phone {
-      padding: 14px;
-      font-size: 14px;
-    }
+    transition: all 0.25s ease;
 
     &:hover {
-      background-color: #000;
+      background: #ddd;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     &:active {
-      transform: translateY(0);
+      transform: scale(0.98);
     }
   }
-}
-
-.product-not-found {
-  text-align: center;
-  padding: 100px 24px;
-
 }

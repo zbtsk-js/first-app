@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
-import { X, ShoppingCart } from 'lucide-react';
+import {useState, useEffect, useContext} from 'react';
+import {X, ShoppingCart, Sidebar} from 'lucide-react';
 import SideBarItem from "./SideBarItem.jsx";
 import {useCart} from "/front-part/src/js/hooks/useCart";
 import {Link} from "react-router-dom";
-
+import {useNavigate} from "react-router-dom";
+import {observer} from "mobx-react-lite";
+import { AuthContext } from '/front-part/src/js/main.jsx';
+import PaymentService from "../../../services/PaymentService.js";
 const SidebarMenu = ({className}) => {
+    const {AuthStore} = useContext(AuthContext)
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
     useEffect(() => {
@@ -13,7 +18,39 @@ const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
     const toggleMenu = () => {
         setIsOpen(prev => !prev);
     };
+    const HandlecheckOut = () => {
+        if (AuthStore.isAuth){
+            const user = AuthStore.user;
+            const onSubmit = async () => {
+                try {
+                    const payload = {
+                        "items": cart.map(item => ({
+                            productId: item.id,
+                            name: item.title,
+                            quantity: item.quantity,
+                            imageSrc: item.imageSrc})),
 
+                        "email": user.email,
+                        "firstName": user.firstName,
+                        "lastName": user.lastName,
+                        "address": user.address,
+                        "city": user.city,
+                        "country": user.country,
+                        "postcode": user.postcode,
+                    }
+
+                    const res = await PaymentService.createPayment(payload)
+                    const PaymentLink = res.data.checkoutUrl
+                    window.location.href = PaymentLink;
+                } catch (e) {
+                    console.error("Payment creation failed:", e);
+                }
+            }
+            onSubmit()
+            return
+        }
+        navigate('/checkout');
+    }
     return (
         <div className="header__cart-wrapper">
             <a onClick={toggleMenu} className={className}>
@@ -45,9 +82,9 @@ const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
                 <div className="sidebar-menu__summary">
                     <div className="sidebar-menu__total">
                         <span>Total:</span>
-                        <span>{CartPriceSummary} NOK</span>
+                        <span>{CartPriceSummary} KR</span>
                     </div>
-                    <Link to={`/checkOut`} disabled={CartPriceSummary <= 0} className='sidebar-menu__button button-primary' >Checkout</Link>
+                    <button disabled={CartPriceSummary <= 0} className='sidebar-menu__button button-primary' onClick={HandlecheckOut}> Checkout</button>
                 </div>
             </aside>
         </div>
@@ -55,4 +92,4 @@ const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
     );
 };
 
-export default SidebarMenu;
+export default observer(SidebarMenu);

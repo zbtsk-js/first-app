@@ -3,5 +3,4 @@ const RoleScheme = new Schema({
 
     value: {type: String, default: 'user'}
 })
-
-export default mongoose.models.Role || mongoose.model("Role", RoleScheme);
+export default mongoose.model("Role", RoleScheme);

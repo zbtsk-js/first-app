@@ -1,20 +1,20 @@
 import { createMollieClient } from '@mollie/api-client'
-const MollieClient = createMollieClient({apiKey: process.env.MOLLIE_API_KEY})
 
-class MollieService {
+export class MollieService {
+    constructor() {
+        this.client = createMollieClient({apiKey: process.env.MOLLIE_API_KEY})
+    }
     async createPayment(order){
-         const MolliePayment = await MollieClient.payments.create({
+         const MolliePayment = await this.client.payments.create({
             amount: { currency: 'NOK', value: order.amount.toFixed(2) },
             description: `Order ${order._id}`,
             redirectUrl: `${process.env.REDIRECT_URL}/success?orderID=${order._id}`,
-            webhookUrl: `${process.env.API_URL}/webhook`,
+            webhookUrl: `${process.env.API_URL}/payment/webhook`,
             metadata: { orderId: order._id.toString() }
         })
         return MolliePayment;
-
     }
     async getPayment(paymentId) {
-        return await MollieClient.payments.get(paymentId);
-    }}
-
-export default new MollieService()
+        return await this.client.payments.get(paymentId);
+    }
+}

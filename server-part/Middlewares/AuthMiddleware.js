@@ -17,7 +17,7 @@ export default function AuthMiddleware(req, res, next){
         }
         req.userData = userData
         next()
-    }catch (e){throw ApiError}
+    }catch (e){next(ApiError.UnauthorizedError())}
 
 
 }
