@@ -2,18 +2,21 @@ import {useParams} from "react-router-dom";
 import {useCart} from "../../../hooks/useCart";
 import {useState} from "react";
 import { Truck, Package, Star } from 'lucide-react';
-import ProductStore from "../../../stores/ProductStore.js";
+import {useProducts} from "../../../hooks/useProducts.js";
+import Loader from "../../UI/Loader.jsx";
 import {observer} from "mobx-react-lite";
 
 const ProductDetails = observer(() => {
     const {id} = useParams()
-    const product = ProductStore.products.find(p => p._id === id || p.id == id)
-    console.log({...product})
+    const { data: products, isLoading } = useProducts();
+    const product = products?.find(p => p._id === id || p.id == id)
     const [quantity, setQuantity] = useState(1)
 
     const incrementQuantity = () => setQuantity(prev => prev + 1);
     const decrementQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
     const {addToCart}= useCart()
+
+    if (isLoading) return <Loader />;
 
     if (!product) {
         return <div className="container">Product not found</div>

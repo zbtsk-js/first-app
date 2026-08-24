@@ -3,7 +3,6 @@ import { User, Mail, Phone, MapPin, Package, Calendar, Clock, ChevronRight, X } 
 import { motion, AnimatePresence } from 'framer-motion';
 import {observer} from 'mobx-react-lite';
 import { AuthContext } from '../main.jsx';
-import ProductStore from '../stores/ProductStore.js';
 
 const Profile = observer(() => {
     const [selectedOrder, setselectedOrder] = useState(null);
