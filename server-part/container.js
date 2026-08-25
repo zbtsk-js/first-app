@@ -4,6 +4,7 @@ import { TokenService } from './service/token-service.js';
 import { OrderService } from './service/order-service.js';
 import { MollieService } from './service/mollie-service.js';
 import {PaymentService} from "./service/payment-service.js";
+import {EmailController} from "./controllers/EmailController.js";
 import UserModule from './Models/User.js';
 import TokenModule from './Models/token-model.js';
 import OrderModule from './Models/Order.js';
@@ -34,6 +35,7 @@ const orderService = new OrderService({
 const paymentService = new PaymentService({Order: OrderModule, MollieService: mollieService,Product: ProductModule, OrderService: orderService});
 // 3. Инициализация контроллеров
 const authController = new AuthController(userService);
+const emailController = new EmailController(userService);
 const orderController = new OrderController({
     OrderService: orderService,
 });
@@ -50,4 +52,5 @@ export {
     orderController,
     userController,
     paymentController,
+    emailController,
 };

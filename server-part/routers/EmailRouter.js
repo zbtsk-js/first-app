@@ -1,7 +1,7 @@
-import {authController} from "../container.js";
+import {emailController} from "../container.js";
 import {Router} from "express";
 const EmailRouter = Router();
 
-EmailRouter.get('/checkEmail', authController.checkifEmailexists)
-EmailRouter.get ('/getEmailbyTheLink', authController.getEmailbyTheLink)
+EmailRouter.get('/checkEmail', emailController.checkifEmailexists)
+EmailRouter.get ('/getEmailbyTheLink', emailController.getEmailbyTheLink)
 export default EmailRouter;
