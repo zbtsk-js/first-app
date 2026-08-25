@@ -1,12 +1,11 @@
 import {useState, useEffect, useContext} from 'react';
 import {X, ShoppingCart, Sidebar} from 'lucide-react';
-import SideBarItem from "./SideBarItem.jsx";
+import SideBarItem from "../Layout/sidebarMenu/SideBarItem.jsx";
 import {useCart} from "/front-part/src/js/hooks/useCart";
-import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {observer} from "mobx-react-lite";
-import { AuthContext } from '/front-part/src/js/main.jsx';
-import PaymentService from "../../../services/PaymentService.js";
+import { AuthContext } from '../../../js/main.jsx';
+import PaymentService from "../../../js/services/PaymentService.js";
 const SidebarMenu = ({className}) => {
     const {AuthStore} = useContext(AuthContext)
     const navigate = useNavigate();

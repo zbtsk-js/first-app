@@ -23,7 +23,7 @@ const Signupform = () => {
             navigate('/profile');
         } catch (e) {
             console.error('Google login error:', e);
-            setError("email", { message: "Ошибка входа через Google" });
+            setError("email", { message: e.response?.data?.message });
         }
     };
 
