@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CartPage from "./components/Cart/Cart.jsx";
+import CartPage from "./components/Layout/Cart/Cart.jsx";
 import ProductDetails from "./components/Layout/Product/ProductDetails.jsx"
 import LegalInformation from "./components/Layout/AboutUsInfo/AboutUs.jsx";
 import Layout from "./components/Layout/Layout.jsx";
@@ -7,7 +7,7 @@ import Hero from "./components/Layout/Hero/Hero.jsx";
 import PaymentRedirect from "./pages/PaymentRedirect.jsx";
 import Catalog from "./components/Layout/Catalog/Catalog.jsx";
 import PaymentForm from "./pages/PaymentForm.jsx";
-import Profile from "./components/Layout/Profile/Profile.jsx";
+import Profile from "../js/components/Layout/Profile/Profile.jsx";
 import AuthForm from "./pages/AuthForm.jsx";
 import Signupform from "./pages/Signupform.jsx";
 function Mainroutes() {

@@ -2,8 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import { User, Mail, Phone, MapPin, Package, Calendar, Clock, ChevronRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {observer} from 'mobx-react-lite';
-import { AuthContext } from '../main.jsx';
-import ProductStore from '../stores/ProductStore.js';
+import { AuthContext } from '../../../main.jsx';
 
 const Profile = observer(() => {
     const [selectedOrder, setselectedOrder] = useState(null);

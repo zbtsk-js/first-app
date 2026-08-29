@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { User } from 'lucide-react'
 import {observer} from 'mobx-react-lite';
-import SidebarMenu from "../../Cart/SidebarCart.jsx";
+import SidebarMenu from "../Cart/SidebarCart.jsx";
 import NavSidebar from "../sidebarMenu/NavSidebar.jsx";
 import { AuthContext } from '/front-part/src/js/main.jsx';
 import {useContext} from "react";
