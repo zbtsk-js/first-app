@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard.jsx";
 import {useProducts} from "../../../hooks/useProducts.js";
-import Loader from "../../UI/Loader.jsx";
+import Loader from "../UI/Loader.jsx";
 import {observer} from "mobx-react-lite";
 
 
