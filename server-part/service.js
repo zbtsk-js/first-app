@@ -6,6 +6,7 @@ import AuthRouter from "./routers/AuthRouter.js";
 import PaymentRouter from "./routers/PaymentRouter.js";
 import OrderRouter from "./routers/OrderRouter.js";
 import EmailRouter from "./routers/EmailRouter.js";
+import CheckoutRouter from "./routers/CheckoutRouter.js";
 import dotenv from 'dotenv';
 import errorMiddleware from './Middlewares/error-middleware.js';
 
@@ -28,6 +29,7 @@ app.use('/auth', AuthRouter);
 app.use('/payment', PaymentRouter)
 app.use('/order', OrderRouter)
 app.use('/emails', EmailRouter)
+app.use('/checkout', CheckoutRouter)
 app.use(errorMiddleware)
 
 // Подключение к MongoDB и запуск сервера

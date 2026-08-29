@@ -22,25 +22,13 @@
          }
          return order;
      }
-    async finalizeOrder(orderId) {
-         const Order = await this.getOrder(orderId);
-         let UserData = null;
+     async attachPayment(orderId, paymentId) {
+         const order = await this.OrderModule.findById(orderId);
 
-        if(Order.status === 'paid'){
-            const productIds = Order.items.map(item => item.productId)
-            const ProductData = await this.ProductModule.find({id: {$in: productIds}})
-             UserData = await this.UserService.LazyRegister(Order.customerData, Order.items)
-            Order.user = UserData.user.id
-            await Order.save()
-            try {
-                await this.MailService.SuccessfullPurchase({to: Order.customerData.email, OrderData: Order, ProductData: ProductData})
-            } catch (err) {
-                console.error('Failed to send activation email');
-                // ✅ ОБОРАЧИВАТЬ — юзер уже создан, письмо не обязано блокировать успех
-            }
-     }
-        return {UserData, Order}
- }}
+         order.mollieId = paymentId;
+
+         return order.save();
+     }}
 
 
 
