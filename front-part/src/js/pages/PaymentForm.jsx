@@ -5,11 +5,12 @@ import Select from 'react-select';
 import { useForm } from 'react-hook-form';
 import {useQuery} from "@tanstack/react-query";
 import useDebounce from "../hooks/useDebounce.js";
-import PaymentService from "../services/PaymentService.js";
+import {useCheckout} from '../hooks/useCheckout.js'
 import AuthService from "../services/AuthService.js";
 const PaymentForm = () => {
     const {register, reset, watch, handleSubmit, formState: { errors, isSubmitting }} = useForm();
     const {cart, CartPriceSummary} = useCart();
+    const {mutate: Checkout} = useCheckout();
     const Email = watch('email')
     const DebouncedEmail = useDebounce(Email, 900)
     const Countries = [
@@ -33,10 +34,9 @@ const PaymentForm = () => {
             "country": data.country,
             "postcode": data.postcode,
         }
+        Checkout(payload)
 
-        const res = await PaymentService.createPayment(payload)
-        const PaymentLink = res.data.checkoutUrl
-        window.location.href = PaymentLink;
+
     } catch (e) {
         console.error("Payment creation failed:", e);
     }

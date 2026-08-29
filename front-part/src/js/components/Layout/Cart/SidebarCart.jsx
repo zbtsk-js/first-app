@@ -1,14 +1,14 @@
 import {useState, useEffect, useContext} from 'react';
 import {X, ShoppingCart, Sidebar} from 'lucide-react';
-import SideBarItem from "./SideBarItem.jsx";
+import SideBarItem from "../sidebarMenu/SideBarItem.jsx";
 import {useCart} from "/front-part/src/js/hooks/useCart";
-import {Link} from "react-router-dom";
+import {useCheckout} from "../../../hooks/useCheckout.js";
 import {useNavigate} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import { AuthContext } from '/front-part/src/js/main.jsx';
-import PaymentService from "../../../services/PaymentService.js";
 const SidebarMenu = ({className}) => {
     const {AuthStore} = useContext(AuthContext)
+    const {mutate: Checkout, data} = useCheckout();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
@@ -19,37 +19,28 @@ const {cart, CartPriceSummary, CartQuantitySummary} = useCart()
         setIsOpen(prev => !prev);
     };
     const HandlecheckOut = () => {
-        if (AuthStore.isAuth){
-            const user = AuthStore.user;
-            const onSubmit = async () => {
-                try {
-                    const payload = {
-                        "items": cart.map(item => ({
-                            productId: item.id,
-                            name: item.title,
-                            quantity: item.quantity,
-                            imageSrc: item.imageSrc})),
-
-                        "email": user.email,
-                        "firstName": user.firstName,
-                        "lastName": user.lastName,
-                        "address": user.address,
-                        "city": user.city,
-                        "country": user.country,
-                        "postcode": user.postcode,
-                    }
-
-                    const res = await PaymentService.createPayment(payload)
-                    const PaymentLink = res.data.checkoutUrl
-                    window.location.href = PaymentLink;
-                } catch (e) {
-                    console.error("Payment creation failed:", e);
-                }
-            }
-            onSubmit()
+        if (!AuthStore.isAuth){
+            navigate('/checkout')
             return
         }
-        navigate('/checkout');
+        const user = AuthStore.user;
+        const payload = {
+            "items": cart.map(item => ({
+                productId: item.id,
+                name: item.title,
+                quantity: item.quantity,
+                imageSrc: item.imageSrc})),
+
+            "email": user.email,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "address": user.address,
+            "city": user.city,
+            "country": user.country,
+            "postcode": user.postcode,
+        }
+        Checkout(payload)
+        window.location.href = data.checkoutUrl
     }
     return (
         <div className="header__cart-wrapper">
