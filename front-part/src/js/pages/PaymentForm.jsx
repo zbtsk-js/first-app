@@ -3,11 +3,16 @@ import {useEffect} from 'react';
 import {useCart} from "/front-part/src/js/hooks/useCart.js";
 import Select from 'react-select';
 import { useForm } from 'react-hook-form';
-import PaymentService from "../services/PaymentService.js";
+import {useQuery} from "@tanstack/react-query";
+import useDebounce from "../hooks/useDebounce.js";
+import {useCheckout} from '../hooks/useCheckout.js'
 import AuthService from "../services/AuthService.js";
 const PaymentForm = () => {
-    const {register, reset, getValues, handleSubmit, formState: { errors, isSubmitting }} = useForm();
+    const {register, reset, watch, handleSubmit, formState: { errors, isSubmitting }} = useForm();
     const {cart, CartPriceSummary} = useCart();
+    const {mutate: Checkout} = useCheckout();
+    const Email = watch('email')
+    const DebouncedEmail = useDebounce(Email, 900)
     const Countries = [
         { value: 'Norway', label: 'Norway' },
         { value: 'Sweden', label: 'Sweden' },
@@ -29,29 +34,18 @@ const PaymentForm = () => {
             "country": data.country,
             "postcode": data.postcode,
         }
+        Checkout(payload)
 
-        const res = await PaymentService.createPayment(payload)
-        const PaymentLink = res.data.checkoutUrl
-        window.location.href = PaymentLink;
+
     } catch (e) {
         console.error("Payment creation failed:", e);
     }
 }
-    const CheckEmail = async (email) => {
-    if(!email) return;
-    console.log('Email requested: ', email)
-    try {
-        const res = await AuthService.checkifEmailexists(email)
-        if(res.exists) {
-            return 'Email already exists, login or use another email'
-        }
-        return true
-    }catch (e) {
-        console.error("Email check failed:", e);
-        return true
-    }
-
-}
+const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
+    queryKey: ['email-exists', DebouncedEmail],
+    queryFn: async () => await AuthService.checkifEmailexists(DebouncedEmail),
+    enabled: !!DebouncedEmail
+})
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem('Forminfo'));
@@ -73,10 +67,11 @@ const PaymentForm = () => {
                             placeholder="example@mail.com"
                             {...register('email', {
                                 required: 'Enter email',
-                                validate: CheckEmail
                             })}
                         />
                         {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+                        {isCheckingEmail && <p style={{ color: 'blue' }}>Checking email...</p>}
+                        {!isCheckingEmail && checkEmail?.exists && <p style={{ color: 'red' }}>Email already exists</p>}
                     </div>
 
                     <div className="payment-form-page__shipping-section">

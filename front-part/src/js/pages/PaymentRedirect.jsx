@@ -1,42 +1,33 @@
 import PaymentService from "/front-part/src/js/services/PaymentService.js";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
 import {AuthContext} from "../main.jsx";
 import {observer} from "mobx-react-lite";
 import {useCart} from "../hooks/useCart.js";
+import {useQuery} from "@tanstack/react-query";
 
 const PaymentRedirect =  () => {
     const params = new URLSearchParams(window.location.search);
     const orderID = params.get("orderID");
-    const [order, setOrder] = useState(null);
     const {AuthStore} = useContext(AuthContext);
     const {clearCart} = useCart()
-    useEffect(() => {
-            let timeout
-            const checkStatus = async () => {
-                try {
-                if(!orderID) return;
-                const orderData = await PaymentService.checkOrder(orderID);
-                    await AuthStore.checkAuth()
-                    setOrder(orderData)
-                if(orderData.status === 'pending') {
-                    timeout = setTimeout(checkStatus, 3000);
-                }
-                else if(orderData.status === 'paid') {
-                    clearCart()
-                }
-            }catch (e) {
-                    console.error(e)
-                }
-        }
-        checkStatus();
-        return () => clearTimeout(timeout);
 
-    }, [orderID])
+    const {data: orderData, isLoading} = useQuery({
+        queryKey: ["orderData", orderID],
+        queryFn: async () => await PaymentService.checkOrder(orderID),
+        enabled: !!orderID,
+        refetchInterval: (query) =>{
+            return query.state.data?.status === 'pending' ? 3000 : false
+        }
+    })
+
+
     useEffect(() => {
-        console.log(order)
-    }, [order])
-    if (!order) {
+        if(orderData?.status === 'paid') {
+            AuthStore.checkAuth()
+            clearCart()}
+    }, [orderData?.status])
+    if (isLoading) {
         return (
             <div className="payment-redirect">
                 <div className="payment-redirect__content">
@@ -50,7 +41,7 @@ const PaymentRedirect =  () => {
         );
     }
 
-    if (order.status === "paid") {
+    if (orderData.status === "paid") {
 
         return (
             <div className="payment-redirect payment-redirect--success">
@@ -71,7 +62,7 @@ const PaymentRedirect =  () => {
 
     }
 
-    if (order.status === "canceled" || order.status === "failed") {
+    if (orderData.status === "canceled" || orderData.status === "failed") {
         return (
             <div className="payment-redirect payment-redirect--error">
                 <div className="payment-redirect__content">
@@ -84,7 +75,7 @@ const PaymentRedirect =  () => {
         );
     }
 
-    if (order.status === "pending") {
+    if (orderData.status === "pending") {
         return (
             <div className="payment-redirect payment-redirect--pending">
                 <div className="payment-redirect__content">

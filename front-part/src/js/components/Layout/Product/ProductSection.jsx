@@ -1,9 +1,13 @@
 import ProductCard from "./ProductCard.jsx";
-import ProductStore from "../../../stores/ProductStore.js";
+import {useProducts} from "../../../hooks/useProducts.js";
+import Loader from "../UI/Loader.jsx";
 import {observer} from "mobx-react-lite";
 
 
 const ProductSection = observer(({ title, subtitle}) => {
+    const { data: products, isLoading } = useProducts();
+
+    if (isLoading) return <Loader />;
 
     return (
         <div id="collection" className="product-section container">
@@ -17,9 +21,9 @@ const ProductSection = observer(({ title, subtitle}) => {
                     role="list"
                 >
 
-                    {ProductStore.products.map(product => (
+                    {(products || []).map(product => (
                             <li 
-                                key={product._id || product.id}
+                                key={product._id}
                                 className="bordered-grid__item" 
                                 role="listitem"
                             >

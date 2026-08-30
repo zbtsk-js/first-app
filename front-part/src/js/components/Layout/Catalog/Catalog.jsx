@@ -1,15 +1,19 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState} from "react";
 import ProductCard from "../Product/ProductCard.jsx";
 import SearchBar from "../searchBar/SearchBar.jsx";
 import useDebounce from "../../../hooks/useDebounce.js";
-import ProductStore from "../../../stores/ProductStore.js";
+import {useProducts} from "../../../hooks/useProducts.js";
+import Loader from "../../UI/Loader.jsx";
 import {observer} from "mobx-react-lite";
 
 const Catalog = observer(() => {
+  const { data: products, isLoading } = useProducts();
   const [search, setSearch] = useState("");
   const FilteredSearch = useDebounce(search, 50);
 
-  const filteredProducts = ProductStore.products.filter(p =>
+  if (isLoading) return <Loader />;
+
+  const filteredProducts = products?.filter(p =>
       p.title?.includes(FilteredSearch)
   )
   return (

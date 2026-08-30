@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 const ProductCard = (product) => {
     const {
         _id,
-        id,
         title,
         price,
         imageSrc,
         imageAlt,
     } = product;
 
-    const productId = _id || id;
+    const productId = _id;
 
     return (
         // Убран лишний внутренний div. Теперь всё находится сразу в Link
