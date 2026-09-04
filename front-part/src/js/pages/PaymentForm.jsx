@@ -1,14 +1,15 @@
 import React from 'react';
 import {useEffect} from 'react';
-import {useCart} from "/front-part/src/js/hooks/useCart.js";
+import {useCart} from "../hooks/useCart.js";
 import Select from 'react-select';
-import { useForm } from 'react-hook-form';
-import {useQuery} from "@tanstack/react-query";
+import { useForm, Controller } from 'react-hook-form';
 import useDebounce from "../hooks/useDebounce.js";
 import {useCheckout} from '../hooks/useCheckout.js'
-import AuthService from "../services/AuthService.js";
+import {useEmailAvailabilaty} from "../hooks/useEmailAvailabilaty.js";
+import { zodResolver } from '@hookform/resolvers/zod'
+import {checkoutSchema} from "../schemas/checkoutSchema.js";
 const PaymentForm = () => {
-    const {register, reset, watch, handleSubmit, formState: { errors, isSubmitting }} = useForm();
+    const {register, reset, watch, control, handleSubmit, formState: { errors, isSubmitting }} = useForm({resolver: zodResolver(checkoutSchema)});
     const {cart, CartPriceSummary} = useCart();
     const {mutate: Checkout} = useCheckout();
     const Email = watch('email')
@@ -41,11 +42,7 @@ const PaymentForm = () => {
         console.error("Payment creation failed:", e);
     }
 }
-const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
-    queryKey: ['email-exists', DebouncedEmail],
-    queryFn: async () => await AuthService.checkifEmailexists(DebouncedEmail),
-    enabled: !!DebouncedEmail
-})
+    const {data:checkEmail, isFetching: isCheckingEmail} = useEmailAvailabilaty(DebouncedEmail)
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem('Forminfo'));
@@ -84,11 +81,7 @@ const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
                                     id="firstName"
                                     className="payment-form-page__input"
                                     placeholder="Ivan"
-                                    {...register('firstName', {
-                                        required: 'Enter first name',
-                                        minLength: { value: 2, message: 'First name is too short' },
-                                        maxLength: { value: 50, message: 'First name is too long' }
-                                    })}
+                                    {...register('firstName', )}
                                 />
                                 {errors.firstName && <p style={{ color: 'red' }}>{errors.firstName.message}</p>}
                             </div>
@@ -100,11 +93,7 @@ const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
                                     id="lastName"
                                     className="payment-form-page__input"
                                     placeholder="Ivanov"
-                                    {...register('lastName', {
-                                        required: 'Enter last name',
-                                        minLength: { value: 2, message: 'Last name is too short' },
-                                        maxLength: { value: 50, message: 'Last name is too long' },
-                                    })}
+                                    {...register('lastName')}
                                 />
                                 {errors.lastName && <p style={{ color: 'red' }}>{errors.lastName.message}</p>}
                             </div>
@@ -117,11 +106,7 @@ const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
                                 id="address"
                                 className="payment-form-page__input"
                                 placeholder="Street, house, apartment"
-                                {...register('address', {
-                                    required: 'Enter address',
-                                    minLength: { value: 5, message: 'Address is too short' },
-                                    maxLength: { value: 100, message: 'Address is too long' },
-                                })}
+                                {...register('address')}
                             />
                             {errors.address && <p style={{ color: 'red' }}>{errors.address.message}</p>}
                         </div>
@@ -134,11 +119,7 @@ const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
                                     id="city"
                                     className="payment-form-page__input"
                                     placeholder="Oslo"
-                                    {...register('city', {
-                                        required: 'Enter city',
-                                        minLength: { value: 2, message: 'City name is too short' },
-                                        maxLength: { value: 50, message: 'City name is too long' },
-                                    })}
+                                    {...register('city', )}
                                 />
                                 {errors.city && <p style={{ color: 'red' }}>{errors.city.message}</p>}
                             </div>
@@ -150,13 +131,7 @@ const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
                                     id="postcode"
                                     className="payment-form-page__input"
                                     placeholder="101000"
-                                    {...register('postcode', {
-                                        required: 'Enter postal code',
-                                        minLength: { value: 4, message: 'Postal code must be at least 4 digits' },
-                                        maxLength: { value: 10, message: 'Postal code is too long' },
-                                        pattern: { value: /^[0-9]+$/, message: 'Only digits are allowed' },
-                                        valueAsNumber: true
-                                    })}
+                                    {...register('postcode', )}
                                 />
                                 {errors.postcode && <p style={{ color: 'red' }}>{errors.postcode.message}</p>}
                             </div>
@@ -164,7 +139,9 @@ const {data:checkEmail, isFetching: isCheckingEmail} = useQuery({
 
                         <div className="payment-form-page__group">
                             <label htmlFor="country">Country</label>
-                            <Select id="country" className="payment-form-page__input" options={Countries}/>
+                            <Controller  name= "country" render={({field: {onChange, ref, value}}) => {
+                                <Select ref={ref} value={Countries.find(c => c.value === value )}    id="country" className="payment-form-page__input" options={Countries} onChange={(val) => onChange(val ? val.value : '')}/>
+                            }} control={control}/>
                         </div>
                     </div>
 

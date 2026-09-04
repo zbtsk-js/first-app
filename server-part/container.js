@@ -50,7 +50,7 @@ const orderController = new OrderController({
     OrderService: orderService,
 });
 const userController = new UserController(userService, UserModule);
-const emailController = new EmailController(userServicee);
+const emailController = new EmailController(userService);
 const paymentController = new PaymentController(paymentService);
 export {
     userService,
