@@ -148,11 +148,7 @@ export class UserService {
         }
         return user.email
     }
-    async getUserData(AccessToken){
-        const UserData =  await this.TokenService.ValidateAccessToken(AccessToken)
-        if (!UserData) {
-            throw ApiError.UnauthorizedError()
-        }
+    async getUserData(UserData){
         const user = await this.UserModule.findById(UserData.id)
         const Orders = await this.OrderModule.find({ user: user._id })
         return {User: user, Orders}

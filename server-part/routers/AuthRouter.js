@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import {authController, userController} from '../container.js';
 import {body} from 'express-validator';
+import AuthMiddleware from "../Middlewares/AuthMiddleware.js";
 
 const AuthRouter = Router();
 
@@ -16,7 +17,7 @@ AuthRouter.post('/logout', authController.logout);
 AuthRouter.get('/refresh', authController.refresh);
 AuthRouter.get('/activate/:link', authController.activate);
 AuthRouter.post('/lazyActivation', authController.lazyActivation);
-AuthRouter.get('/getUserData', userController.getUserData);
+AuthRouter.get('/getUserData',[AuthMiddleware], userController.getUserData);
 AuthRouter.post('/google-login', authController.googleLogin);
 AuthRouter.get('/users', userController.userstatus);
 

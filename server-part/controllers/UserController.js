@@ -15,10 +15,7 @@ export class UserController {
     }
     getUserData = async (req, res, next) => {
         try {
-            const authHeader = req.headers.authorization
-            const AccessToken = authHeader?.split(' ')[1]
-            console.log(AccessToken)
-            const userData = await this.UserService.getUserData(AccessToken);
+            const userData = await this.UserService.getUserData(req.UserData);
             console.log('UserData after validate:', userData)
             return res.json(userData)
         } catch (e) {
