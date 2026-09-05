@@ -7,9 +7,6 @@ export const checkoutSchema = z.object({
     lastName: z.string().min(2, "Last name must be at least 2 characters"),
 
     email: z.email("Invalid email"),
-
-    phone: z.string().min(8, "Phone number is too short"),
-
     address: z
         .string()
         .min(3, "Address is required"),
@@ -19,7 +16,7 @@ export const checkoutSchema = z.object({
         .min(2, "City is required"),
 
     postcode: z
-        .number()
+        .string()
         .min(4, "Invalid postcode"),
 
     country: z

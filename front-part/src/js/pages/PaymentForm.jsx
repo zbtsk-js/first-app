@@ -48,7 +48,6 @@ const PaymentForm = () => {
         const saved = JSON.parse(localStorage.getItem('Forminfo'));
         if (saved) reset(saved); // сброс с сохранёнными значениями
     }, [reset]);
-
     return (
         <div className="payment-form-page">
             <div className="payment-form-page__inner container">
@@ -140,8 +139,10 @@ const PaymentForm = () => {
                         <div className="payment-form-page__group">
                             <label htmlFor="country">Country</label>
                             <Controller  name= "country" render={({field: {onChange, ref, value}}) => {
-                                <Select ref={ref} value={Countries.find(c => c.value === value )}    id="country" className="payment-form-page__input" options={Countries} onChange={(val) => onChange(val ? val.value : '')}/>
+                               return <Select ref={ref} value={Countries.find(c => c.value === value )}    id="country" className="payment-form-page__input" options={Countries} onChange={(val) => onChange(val ? val.value : '')}
+                                />
                             }} control={control}/>
+                            {errors.country && <p style={{ color: 'red' }}>{errors.country.message}</p>}
                         </div>
                     </div>
 
@@ -199,6 +200,7 @@ const PaymentForm = () => {
                     <button className="payment-form-page__submit button-dark" disabled={isSubmitting} type="submit" form="payment-form">
                         {isSubmitting ? 'Sending...' : `Pay ${CartPriceSummary} NOK`}
                     </button>
+                    <p>{JSON.stringify(errors, null, 2)}</p>
                 </div>
             </div>
         </div>
