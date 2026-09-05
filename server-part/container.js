@@ -1,6 +1,6 @@
 import { UserService } from './service/user-service.js';
 import { MailService } from './service/mail-service.js';
-import { TokenService } from './service/token-service.js';
+import   {TokenService}  from './service/token-service.js';
 import { OrderService } from './service/order-service.js';
 import { MollieService } from './service/mollie-service.js';
 import {PaymentService} from "./service/payment-service.js";
@@ -10,12 +10,11 @@ import OrderModule from './Models/Order.js';
 import ProductModule from './Models/Product.js';
 import { CheckoutService } from './service/checkout-service.js';
 import CheckoutController from './controllers/CheckOutController.js';
-import { OrderController } from './controllers/OrderController.js';
 import { UserController } from './controllers/UserController.js';
 import { PaymentController } from './controllers/PaymentController.js';
 import { AuthController } from './controllers/AuthController.js';
 import { EmailController} from "./controllers/EmailController.js";
-// 1. Инициализация базовых сервисов
+// базовые сервисы
 const mailService = new MailService();
 const tokenService = new TokenService(TokenModule);
 const mollieService = new MollieService();
@@ -46,9 +45,6 @@ const checkoutService = new CheckoutService({
 // 3. Инициализация контроллеров
 const authController = new AuthController(userService);
 const checkoutController = new CheckoutController(checkoutService);
-const orderController = new OrderController({
-    OrderService: orderService,
-});
 const userController = new UserController(userService, UserModule);
 const emailController = new EmailController(userService);
 const paymentController = new PaymentController(paymentService);
@@ -61,7 +57,6 @@ export {
     mollieService,
     paymentService,
     authController,
-    orderController,
     userController,
     emailController,
     paymentController,
