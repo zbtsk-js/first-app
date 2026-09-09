@@ -1,3 +1,5 @@
+import {setAuthCookie} from "../utils/cookie.js";
+
 class CheckoutController {
     constructor(CheckoutService) {
         this.CheckoutService = CheckoutService;
@@ -18,8 +20,7 @@ class CheckoutController {
             const orderId = req.params.orderId;
             const { UserData, Order } = await this.CheckoutService.handlePaidOrder(orderId);
             if (UserData?.RefreshToken) {
-                const maxAge = 30 * 24 * 60 * 60 * 1000;
-                res.cookie('refreshToken', UserData.RefreshToken, { maxAge: maxAge, httpOnly: true, sameSite: 'lax' });
+                setAuthCookie(res, UserData.RefreshToken);
             }
             return res.json({
                 status: Order.status,
