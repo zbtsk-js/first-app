@@ -1,6 +1,7 @@
 import {ApiError} from "../exceptions/exceptions.js";
-import {TokenService} from "../service/token-service.js"
-export default function AuthMiddleware(req, res, next){
+import {tokenService} from "../container.js";
+
+export default async function AuthMiddleware(req, res, next){
     try {
         const BearerToken = req.headers.authorization
         if(!BearerToken){
@@ -11,8 +12,8 @@ export default function AuthMiddleware(req, res, next){
             throw ApiError.UnauthorizedError()
 
         }
-        const UserData = TokenService.ValidateAccessToken(AccessToken)
-        if(!userData){
+        const UserData = await tokenService.ValidateAccessToken(AccessToken)
+        if(!UserData){
             throw ApiError.UnauthorizedError()
         }
         req.UserData = UserData

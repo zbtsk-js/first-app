@@ -5,7 +5,7 @@ export default function FormMiddleware(req, res, next) {
     if (!result.success) {
         return res.status(400).json({
             message: 'Invalid request data',
-            errors: data.error.flatten()
+            errors: z.flatten(result.error)
         })
 
     }

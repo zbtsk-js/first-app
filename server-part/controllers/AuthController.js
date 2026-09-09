@@ -61,7 +61,7 @@ try{
         try {
             const {refreshToken} = req.cookies;
             const UserData = await this.UserService.refresh(refreshToken);
-            this._setAuthCookie(res, UserData.RefreshToken)
+            setAuthCookie(res, UserData.RefreshToken)
             return res.json(UserData);
         } catch (e) {
             next(e)

@@ -14,7 +14,10 @@ const PaymentRedirect =  () => {
 
     const {data: orderData, isLoading} = useQuery({
         queryKey: ["orderData", orderID],
-        queryFn:  () => api.get(`/checkout/${orderID}`),
+        queryFn: async  () => {
+            const {data} = await api.get(`/checkout/${orderID}`)
+            return data
+        },
         enabled: !!orderID,
         refetchInterval: (query) =>{
             return query.state.data?.status === 'pending' ? 3000 : false
