@@ -7,9 +7,9 @@ import useDebounce from "../hooks/useDebounce.js";
 import {useCheckout} from '../hooks/useCheckout.js'
 import {useEmailAvailabilaty} from "../hooks/useEmailAvailabilaty.js";
 import { zodResolver } from '@hookform/resolvers/zod'
-import {checkoutSchema} from "../schemas/checkoutSchema.js";
+import {createOrderSchema} from "../schemas/createOrderSchema.js";
 const PaymentForm = () => {
-    const {register, reset, watch, control, handleSubmit, formState: { errors, isSubmitting }} = useForm({resolver: zodResolver(checkoutSchema)});
+    const {register, reset, watch, control, handleSubmit, formState: { errors, isSubmitting }} = useForm({resolver: zodResolver(createOrderSchema)});
     const {cart, CartPriceSummary} = useCart();
     const {mutate: Checkout} = useCheckout();
     const Email = watch('email')

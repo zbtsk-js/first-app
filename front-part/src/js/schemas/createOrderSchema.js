@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const checkoutSchema = z.object({
+export const createOrderSchema = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters")
         .max(50, "First name is too long"),
 
