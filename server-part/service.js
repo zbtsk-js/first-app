@@ -4,7 +4,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import AuthRouter from "./routers/AuthRouter.js";
 import PaymentRouter from "./routers/PaymentRouter.js";
-import OrderRouter from "./routers/OrderRouter.js";
 import EmailRouter from "./routers/EmailRouter.js";
 import CheckoutRouter from "./routers/CheckoutRouter.js";
 import dotenv from 'dotenv';
@@ -27,7 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/auth', AuthRouter);
 app.use('/payment', PaymentRouter)
-app.use('/order', OrderRouter)
 app.use('/emails', EmailRouter)
 app.use('/checkout', CheckoutRouter)
 app.use(errorMiddleware)

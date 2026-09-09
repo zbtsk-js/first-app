@@ -54,7 +54,7 @@ export class CheckoutService {
             }
         }
         if (!UserData) {
-            throw new Error('Order is not paid or user already exists')
+            throw new Error('Order is not paid')
         }
         return { UserData, Order }
     }
