@@ -1,10 +1,10 @@
-import PaymentService from "/front-part/src/js/services/PaymentService.js";
 import {useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
 import {AuthContext} from "../main.jsx";
 import {observer} from "mobx-react-lite";
 import {useCart} from "../hooks/useCart.js";
 import {useQuery} from "@tanstack/react-query";
+import api from "../http/index.js";
 
 const PaymentRedirect =  () => {
     const params = new URLSearchParams(window.location.search);
@@ -14,7 +14,7 @@ const PaymentRedirect =  () => {
 
     const {data: orderData, isLoading} = useQuery({
         queryKey: ["orderData", orderID],
-        queryFn: async () => await PaymentService.checkOrder(orderID),
+        queryFn:  () => api.get(`/checkout/${orderID}`),
         enabled: !!orderID,
         refetchInterval: (query) =>{
             return query.state.data?.status === 'pending' ? 3000 : false

@@ -6,7 +6,7 @@ export const useCheckout = () =>{
         return data;},
         onSuccess: (data) => {
             console.log('checkout response:', data)
-
+        window.location.href = data.checkoutUrl;
         },
         onError: (e) => console.error("Payment creation failed:", e)
     })
